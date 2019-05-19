@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const LoginForm = ( {
   username, password, onUsernameChange, onPasswordChange, onSubmit,
 } ) => (
-  <form onSubmit={onSubmit}>
+  <form className="login-form" onSubmit={onSubmit}>
     <input
       type="text"
       placeholder="your username"

@@ -8,11 +8,6 @@
     text-align: center;
 }
   
-.center {
-    display: flex;
-    justify-content: center;
-}
-  
 .clickable {
     &:hover {
         cursor: pointer;
