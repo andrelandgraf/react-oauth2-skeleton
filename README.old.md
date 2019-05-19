@@ -1,2 +1,0 @@
-# foodoo-frontend
-foodoo-frontend
