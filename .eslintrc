@@ -9,6 +9,14 @@
         "react"
     ],
     "rules": {
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "space-in-parens": [ 2, "always" ],
+        "template-curly-spacing": [ 2, "always" ],
+        "array-bracket-spacing": [ 2, "always" ],
+        "object-curly-spacing": [ 2, "always" ],
+        "computed-property-spacing": [ 2, "always" ],
+        "space-infix-ops": [2, {"int32Hint": false}],
+        "react/prop-types": [2],
+        "react/require-default-props": [2]
       }
 }

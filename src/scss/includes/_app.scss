@@ -1,0 +1,27 @@
+.button-center {
+    display: block;
+    margin: auto;
+  }
+  
+.text-center {
+    display: block;
+    text-align: center;
+}
+  
+.center {
+    display: flex;
+    justify-content: center;
+}
+  
+.clickable {
+    &:hover {
+        cursor: pointer;
+    }
+  
+    &:focus {
+        background-image: none;
+        outline: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+}
