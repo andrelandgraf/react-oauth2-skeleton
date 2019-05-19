@@ -1,11 +1,11 @@
 import React from 'react';
 
-//import logo from '../../img/logo.svg';
+// import logo from '../../img/logo.svg';
 
 const HomeView = () => (
-    <div>
+  <div>
       Hello World! Hello on our Home Pages
-    </div>
+  </div>
 );
 
 export default HomeView;
