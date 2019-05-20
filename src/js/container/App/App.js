@@ -4,7 +4,8 @@ import {
 } from 'react-router-dom';
 
 import HomeView from '../../views/homeView';
-import LoginView from '../../views/loginView';
+import LoginContainer from '../Login/LoginContainer';
+import OAuthContainer from '../OAuth/OAuthContainer';
 
 import { isAuthenticated } from '../../services/userService';
 
@@ -34,7 +35,8 @@ class App extends React.Component {
                       )
                       : (
                           <Switch>
-                              <Route from="/login" component={LoginView} />
+                              <Route from="/login" component={LoginContainer} />
+                              <Route from="/oauth/v2/login" component={OAuthContainer} />
                               <Redirect path="*" to="/login" />
                           </Switch>
                       )

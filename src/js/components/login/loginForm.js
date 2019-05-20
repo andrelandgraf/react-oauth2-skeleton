@@ -10,12 +10,16 @@ const LoginForm = ( {
             placeholder="your username"
             value={username}
             onChange={onUsernameChange}
+            pattern=".{3,}"
+            title="Username must be longer than 2 characters!"
             required
         />
         <input
             type="password"
             value={password}
             onChange={onPasswordChange}
+            pattern=".{1,}"
+            title="Password must be set!"
             required
         />
         <input type="submit" value="LogIn" className="clickable" />

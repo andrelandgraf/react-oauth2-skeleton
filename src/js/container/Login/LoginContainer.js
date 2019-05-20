@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import LoginForm from '../../components/login/loginForm';
+import LoginView from '../../views/loginView';
 
 import { logUserIn } from '../../services/userService';
 
@@ -58,7 +58,7 @@ class LoginContainer extends React.Component {
   );
 
   renderLoginForm = ( username, password ) => (
-      <LoginForm
+      <LoginView
           username={username}
           password={password}
           onUsernameChange={this.handleUsernameChange}

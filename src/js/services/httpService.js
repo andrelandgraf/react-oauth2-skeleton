@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { refreshAuthToken } from './oAuthService';
-import { getStoredAuthToken } from './userService';
+import { getStoredAuthToken } from './userService';
 
 export const API = 'http://foodoo-backend-api/v1/';
 

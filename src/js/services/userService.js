@@ -1,6 +1,4 @@
-import {
-    GRANT_TYPES, getOAuthHeader, postAuthRequest, getAuthToken,
-} from './oAuthService';
+import { GRANT_TYPES, getOAuthHeader, postAuthRequest } from './oAuthService';
 
 const setStoredRefreshToken = ( refreshToken ) => {
     window.localStorage.refreshToken = refreshToken;
@@ -15,7 +13,7 @@ export const getStoredAuthToken = () => window.localStorage.authToken;
 
 export const logUserIn = ( username, password ) => {
     const data = {
-        grant_type: GRANT_TYPES.PASSWORD,
+        grant_type: GRANT_TYPES.AUTH_CODE,
         username,
         password,
     };
@@ -34,15 +32,14 @@ export const logUserIn = ( username, password ) => {
 
 export const oAuthUser = ( username, password ) => {
     const data = {
-        grant_type: GRANT_TYPES.PASSWORD,
+        grant_type: GRANT_TYPES.AUTH_CODE,
         username,
         password,
     };
+    // TODO get / select / hardcode alexa client secrets here
     const header = getOAuthHeader();
+    // after this backend call, the page will redirect automatically to aws/amazon
     return postAuthRequest( '', data, header )
-        .then( ( res ) => {
-            getAuthToken( res.data.code );
-        } )
         .catch( ( err ) => {
             // eslint-disable-next-line no-console
             console.log( err );
