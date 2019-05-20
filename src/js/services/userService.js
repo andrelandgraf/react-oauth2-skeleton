@@ -17,7 +17,9 @@ export const logUserIn = ( username, password ) => {
         username,
         password,
     };
-    const header = getOAuthHeader();
+    const clientId = process.env.REACT_APP_OAUTH_CLIENT_KEY_ID;
+    const clientSecret = process.env.REACT_APP_OAUTH_CLIENT_SECRET_KEY;
+    const header = getOAuthHeader( clientId, clientSecret );
     return postAuthRequest( '', data, header )
         .then( ( res ) => {
             setStoredAuthToken( res.data.access_token );
@@ -39,8 +41,11 @@ export const oAuthUser = ( username, password, state, clientId, redirectUri ) =>
         // TODO where to add uri?
         redirect_uri: redirectUri,
     };
-    // TODO get / select / hardcode alexa client secrets here
-    const header = getOAuthHeader( clientId );
+    if ( process.env.REACT_APP_OAUTH_ALEXA_CLIENT_KEY_ID !== clientId ) {
+        throw Error( 'unsupported client id!' );
+    }
+    const clientSecret = process.env.REACT_APP_OAUTH_ALEXA_CLIENT_SECRET_KEY;
+    const header = getOAuthHeader( clientId, clientSecret );
     // after this backend call, the page will redirect automatically to aws/amazon
     return postAuthRequest( '', data, header )
         .catch( ( err ) => {
@@ -54,4 +59,4 @@ export const logUserOut = () => {
     window.localStorage.removeItem( 'refreshToken' );
 };
 
-export const isAuthenticated = () => !!getStoredAuthToken();
+export const isAuthenticated = !!getStoredAuthToken();

@@ -1,9 +1,10 @@
 import axios from 'axios';
 
+import { isDevelopment } from '../utilities/env';
 import { refreshAuthToken } from './oAuthService';
 import { getStoredAuthToken } from './userService';
 
-export const API = 'http://foodoo-backend-api/v1/';
+export const API = isDevelopment ? 'http://localhost:3333/' : 'http://foodoo-backend-api/v1/';
 
 function getHeader() {
     return {

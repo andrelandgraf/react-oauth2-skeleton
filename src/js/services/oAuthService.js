@@ -3,7 +3,7 @@ import axios from 'axios';
 import { API } from './httpService';
 import { getStoredRefreshToken } from './userService';
 
-const AUTH_ENDPOINT = 'oauth/v2';
+const AUTH_ENDPOINT = 'oauth/token';
 export const GRANT_TYPES = {
     AUTH_CODE: 'authorization_code',
     REFRESH_TOKEN: 'refresh_token',
@@ -11,11 +11,7 @@ export const GRANT_TYPES = {
 };
 
 // construct the oAuth header
-export const getOAuthHeader = ( clientID = process.env.OAUTH_CLIENT_KEY_ID ) => {
-    let clientSecret = process.env.OAUTH_CLIENT_SECRET_KEY;
-    if ( clientID === process.env.OAUTH_ALEXA_CLIENT_KEY_ID ) {
-        clientSecret = process.env.OAUTH_ALEXA_CLIENT_SECRET_KEY;
-    }
+export const getOAuthHeader = ( clientID, clientSecret ) => {
     if ( !clientID || !clientSecret ) {
         throw Error( 'oauth credientiels undefined' );
     }
