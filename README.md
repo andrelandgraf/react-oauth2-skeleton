@@ -28,7 +28,9 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `npm run deploy`
+
+Includes npm run build to make sure the react app is up to date and finally deploys the react-app. For more details checkout the chapter Deployment.
 
 ## Learn More
 
