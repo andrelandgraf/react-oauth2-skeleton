@@ -30,14 +30,17 @@ export const logUserIn = ( username, password ) => {
         } );
 };
 
-export const oAuthUser = ( username, password ) => {
+export const oAuthUser = ( username, password, state, clientId, redirectUri ) => {
     const data = {
         grant_type: GRANT_TYPES.AUTH_CODE,
         username,
         password,
+        state,
+        // TODO where to add uri?
+        redirect_uri: redirectUri,
     };
     // TODO get / select / hardcode alexa client secrets here
-    const header = getOAuthHeader();
+    const header = getOAuthHeader( clientId );
     // after this backend call, the page will redirect automatically to aws/amazon
     return postAuthRequest( '', data, header )
         .catch( ( err ) => {

@@ -11,9 +11,11 @@ export const GRANT_TYPES = {
 };
 
 // construct the oAuth header
-export const getOAuthHeader = () => {
-    const clientID = process.env.OAUTH_CLIENT_KEY_ID;
-    const clientSecret = process.env.OAUTH_CLIENT_SECRET_KEY;
+export const getOAuthHeader = ( clientID = process.env.OAUTH_CLIENT_KEY_ID ) => {
+    let clientSecret = process.env.OAUTH_CLIENT_SECRET_KEY;
+    if ( clientID === process.env.OAUTH_ALEXA_CLIENT_KEY_ID ) {
+        clientSecret = process.env.OAUTH_ALEXA_CLIENT_SECRET_KEY;
+    }
     if ( !clientID || !clientSecret ) {
         throw Error( 'oauth credientiels undefined' );
     }
