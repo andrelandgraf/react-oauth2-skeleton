@@ -17,8 +17,8 @@ export const getOAuthHeader = ( clientID, clientSecret ) => {
     }
     const credentials = Buffer.from( `${ clientID }:${ clientSecret }` ).toString( 'base64' );
     return {
-        'content-type': 'application/x-www-form-urlencoded',
-        authorization: `Basic ${ credentials }`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: `Basic ${ credentials }`,
     };
 };
 

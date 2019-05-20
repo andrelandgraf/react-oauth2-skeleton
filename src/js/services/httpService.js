@@ -22,7 +22,7 @@ function postHeader() {
 
 export const postRequest = ( endpoint, data ) => {
     axios
-        .post( API + endpoint, data, { headers: postHeader( getStoredAuthToken() ) } )
+        .post( API + endpoint, data, { headers: postHeader() } )
         .then( ( res ) => {
             if ( res === 401 ) {
                 return refreshAuthToken(

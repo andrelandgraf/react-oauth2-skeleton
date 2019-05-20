@@ -54,6 +54,10 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/ma
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
+#### Making use of env variables
+
+.env variables are powerful tools to hide secret information from git and allow the differentiation of different environments via flags. See this guide for how they can be used within create-react-app: https://facebook.github.io/create-react-app/docs/adding-custom-environment-variables
+
 ### Deployment
 
 Use the AWS command-line-interface to deploy the react web app. 

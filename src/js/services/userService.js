@@ -13,7 +13,7 @@ export const getStoredAuthToken = () => window.localStorage.authToken;
 
 export const logUserIn = ( username, password ) => {
     const data = {
-        grant_type: GRANT_TYPES.AUTH_CODE,
+        grant_type: GRANT_TYPES.PASSWORD,
         username,
         password,
     };
