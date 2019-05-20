@@ -30,7 +30,7 @@ Your app is ready to be deployed!
 
 ### `npm run deploy`
 
-Includes npm run build to make sure the react app is up to date and finally deploys the react-app. For more details checkout the chapter Deployment.
+Includes `npm run build` to make sure the react app is up to date. For more details checkout the chapter Deployment.
 
 ## Learn More
 
