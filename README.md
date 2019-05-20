@@ -59,7 +59,7 @@ Use the AWS command-line-interface to deploy the react web app.
 - First install awscli via: `brew install awscli`
 - Run `aws configure` and configure the access keys (use eu-west-1 as your region).
 - Run `npm run deploy` to push the repository to the AWS S3 bucket.
-- Check out the app under: http://<bucket-name>.s3-website-eu-west-1.amazonaws.com
+- Check out the app under: http://bucket-name.s3-website-eu-west-1.amazonaws.com
 
 ### `npm run build` fails to minify
 
