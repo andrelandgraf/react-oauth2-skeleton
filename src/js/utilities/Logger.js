@@ -1,8 +1,6 @@
 /* eslint-disable no-console */
 /**
- * Logging utility for Edge Labs. This currently wraps
- * console.log/console.error calls, but can easily be
- * extended for nice formatting or other outputs.
+ * Logging utility.
  */
 export default class Logger {
     constructor( caller ) {

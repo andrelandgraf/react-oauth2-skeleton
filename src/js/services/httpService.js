@@ -1,8 +1,11 @@
 import axios from 'axios';
 
+import Logger from '../utilities/Logger';
 import { isDevelopment } from '../utilities/env';
 import { refreshAuthToken } from './oAuthService';
 import { getStoredAuthToken } from './userService';
+
+const LoggingUtility = new Logger( 'userService.js' );
 
 export const API = isDevelopment ? 'http://localhost:3333/' : 'http://foodoo-backend-api/v1/';
 
@@ -32,8 +35,7 @@ export const postRequest = ( endpoint, data ) => {
             return res.data;
         } )
         .catch( ( err ) => {
-            // eslint-disable-next-line no-console
-            console.log( err.data );
+            LoggingUtility.err( `Error in post request to entpoint ${ endpoint }`, err );
             return err.response.data.code;
         } );
 };
@@ -41,7 +43,6 @@ export const postRequest = ( endpoint, data ) => {
 export const getRequest = ( endpoint, authToken ) => axios
     .get( API + endpoint, { headers: getHeader( authToken ) } )
     .then( res => res.data ).catch( ( err ) => {
-    // eslint-disable-next-line no-console
-        console.log( err.response.data );
+        LoggingUtility.err( `Error in get request to entpoint ${ endpoint }`, err );
         return err.response.data.code;
     } );

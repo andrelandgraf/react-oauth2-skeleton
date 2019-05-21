@@ -1,6 +1,9 @@
 import qs from 'qs';
 
+import Logger from '../utilities/Logger';
 import { GRANT_TYPES, getOAuthHeader, postAuthRequest } from './oAuthService';
+
+const LoggingUtility = new Logger( 'userService.js' );
 
 const setStoredRefreshToken = ( refreshToken ) => {
     window.localStorage.refreshToken = refreshToken;
@@ -29,8 +32,8 @@ export const logUserIn = ( username, password ) => {
             return res.data.user;
         } )
         .catch( ( err ) => {
-            // eslint-disable-next-line no-console
-            console.log( err );
+            LoggingUtility.err( 'Error while logging in user', err );
+            throw Error( 'Unable to logIn, please check your username and password' );
         } );
 };
 
@@ -51,8 +54,8 @@ export const oAuthUser = ( username, password, state, clientId, redirectUri ) =>
     // after this backend call, the page will redirect automatically to aws/amazon
     return postAuthRequest( '', qs.stringify( data ), header )
         .catch( ( err ) => {
-            // eslint-disable-next-line no-console
-            console.log( err );
+            LoggingUtility.err( 'Error while authenticating user via oAuth', err );
+            throw Error( 'Unable to logIn, please check your username and password' );
         } );
 };
 
