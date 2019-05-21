@@ -16,6 +16,9 @@ class App extends React.Component {
   };
 
   render() {
+      // To avoid getting max. depth exceeded exception in case of successful token generation:
+      window.localStorage.clear();
+
       const { scrollToTop } = this;
 
       if ( !isAuthenticated ) {
