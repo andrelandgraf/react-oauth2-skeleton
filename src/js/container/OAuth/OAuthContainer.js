@@ -10,6 +10,11 @@ class OAuthContainer extends React.Component {
       const { location } = this.props;
       // see: https://developer.amazon.com/de/docs/account-linking/configure-authorization-code-grant.html
       // client_id, response_type, scope, redirect_uri
+      if ( !location.query ) {
+          // eslint-disable-next-line no-alert
+          alert( 'bad query string, check query params' );
+          return;
+      }
       const { state, client_id: clientId, redirect_uri: redirectUri } = location.query;
       oAuthUser( username, password, state, clientId, redirectUri );
   }
@@ -17,6 +22,8 @@ class OAuthContainer extends React.Component {
   render() {
       return (
           <LoginContainer
+              pageName="Third party service authorization"
+              actionName="authorize"
               onSubmit={this.handleSubmit}
           />
       );
@@ -24,7 +31,9 @@ class OAuthContainer extends React.Component {
 }
 
 OAuthContainer.propTypes = {
-    location: PropTypes.objectOf( PropTypes.object ).isRequired,
+    location: PropTypes.shape( {
+        query: PropTypes.object,
+    } ).isRequired,
 };
 
 export default OAuthContainer;

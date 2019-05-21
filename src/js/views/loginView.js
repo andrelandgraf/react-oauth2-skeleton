@@ -4,11 +4,12 @@ import PropTypes from 'prop-types';
 import LoginForm from '../components/login/loginForm';
 
 const LoginView = ( {
-    username, password, onUsernameChange, onPasswordChange, onSubmit,
+    username, password, onUsernameChange, onPasswordChange, onSubmit, pageName, actionName,
 } ) => (
     <div className="login-container">
-        <h1>Hello World! Welcome on our Login/Register Page</h1>
+        <h1>{`Hello World! Welcome to our ${ pageName } Page`}</h1>
         <LoginForm
+            actionName={actionName}
             username={username}
             password={password}
             onUsernameChange={onUsernameChange}
@@ -19,6 +20,8 @@ const LoginView = ( {
 );
 
 LoginView.propTypes = {
+    pageName: PropTypes.string.isRequired,
+    actionName: PropTypes.string.isRequired,
     username: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
     onUsernameChange: PropTypes.func.isRequired,

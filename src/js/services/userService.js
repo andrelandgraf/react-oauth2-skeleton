@@ -37,6 +37,15 @@ export const logUserIn = ( username, password ) => {
         } );
 };
 
+export const registerUser = ( username, password ) => {
+    const data = {
+        username,
+        password,
+    };
+    // TODO call register endpoint
+    console.log( data );
+};
+
 export const oAuthUser = ( username, password, state, clientId, redirectUri ) => {
     const data = {
         grant_type: GRANT_TYPES.AUTH_CODE,

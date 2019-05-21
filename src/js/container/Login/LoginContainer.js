@@ -55,8 +55,10 @@ class LoginContainer extends React.Component {
         <div>Loading...</div>
     );
 
-    renderLoginForm = ( username, password ) => (
+    renderLoginForm = ( username, password, pageName, actionName ) => (
         <LoginView
+            pageName={pageName}
+            actionName={actionName}
             username={username}
             password={password}
             onUsernameChange={this.handleUsernameChange}
@@ -67,17 +69,22 @@ class LoginContainer extends React.Component {
 
     render() {
         const { username, password, isLoading } = this.state;
+        const { pageName, actionName } = this.props;
         if ( isLoading ) return this.renderLoader();
-        return this.renderLoginForm( username, password );
+        return this.renderLoginForm( username, password, pageName, actionName );
     }
 }
 
 LoginContainer.propTypes = {
+    pageName: PropTypes.string,
+    actionName: PropTypes.string,
     onSubmit: PropTypes.func,
     setUser: PropTypes.func,
 };
 
 LoginContainer.defaultProps = {
+    pageName: 'Login',
+    actionName: 'login',
     onSubmit: undefined,
     setUser: undefined,
 };

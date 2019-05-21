@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const LoginForm = ( {
-    username, password, onUsernameChange, onPasswordChange, onSubmit,
+    username, password, onUsernameChange, onPasswordChange, onSubmit, actionName,
 } ) => (
     <form className="login-form" onSubmit={onSubmit}>
         <input
@@ -22,11 +22,12 @@ const LoginForm = ( {
             title="Password must be set!"
             required
         />
-        <input type="submit" value="LogIn" className="clickable" />
+        <input type="submit" value={actionName} className="clickable" />
     </form>
 );
 
 LoginForm.propTypes = {
+    actionName: PropTypes.string.isRequired,
     username: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
     onUsernameChange: PropTypes.func.isRequired,

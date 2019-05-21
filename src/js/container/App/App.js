@@ -6,6 +6,7 @@ import {
 
 import HomeView from '../../views/homeView';
 import LoginContainer from '../Login/LoginContainer';
+import RegistrationContainer from '../Registration/RegistrationContainer';
 import OAuthContainer from '../OAuth/OAuthContainer';
 
 import { isAuthenticated } from '../../services/userService';
@@ -59,6 +60,7 @@ class App extends React.Component {
                                       <LoginContainer {...props} setUser={setUser} />
                                   )}
                               />
+                              <Route from="/register" component={RegistrationContainer} />
                               <Route from="/oauth/v2/login" component={OAuthContainer} />
                               <Redirect path="*" to="/login" />
                           </Switch>
