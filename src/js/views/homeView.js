@@ -1,11 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // import logo from '../../img/logo.svg';
 
-const HomeView = () => (
+const HomeView = ( { user } ) => (
     <div>
-      Hello World! Hello on our Home Pages
+      Hello World!
+        {' '}
+        { user.email }
+        {' '}
+      Welcome on our Home Pages
     </div>
 );
+
+HomeView.propTypes = {
+    user: PropTypes.shape( {
+        email: PropTypes.string.isRequired,
+        id: PropTypes.string.isRequired,
+    } ).isRequired,
+};
 
 export default HomeView;

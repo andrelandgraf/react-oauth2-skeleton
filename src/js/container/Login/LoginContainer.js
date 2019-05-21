@@ -15,18 +15,18 @@ class LoginContainer extends React.Component {
         };
     }
 
-  handleUsernameChange = ( event ) => {
-      this.setState( { username: event.target.value } );
-  }
+    handleUsernameChange = ( event ) => {
+        this.setState( { username: event.target.value } );
+    }
 
-  handlePasswordChange = ( event ) => {
-      this.setState( { password: event.target.value } );
-  }
+    handlePasswordChange = ( event ) => {
+        this.setState( { password: event.target.value } );
+    }
 
     handleSubmit = async ( event ) => {
         event.preventDefault();
         const { username, password } = this.state;
-        const { onSubmit } = this.props;
+        const { onSubmit, setUser } = this.props;
         if ( username.length < 2 || password === '' ) {
             return false;
         }
@@ -36,9 +36,7 @@ class LoginContainer extends React.Component {
             this.setState( { isLoading: true } );
             await logUserIn( username, password )
                 .then( ( user ) => {
-                    // TODO update storage / state / redux something
-                    // eslint-disable-next-line no-console
-                    console.log( user );
+                    setUser( user );
                 } )
                 .catch( () => {
                     this.setState( { isLoading: false } );
@@ -53,33 +51,35 @@ class LoginContainer extends React.Component {
         return true;
     }
 
-  renderLoader = () => (
-      <div>Loading...</div>
-  );
+    renderLoader = () => (
+        <div>Loading...</div>
+    );
 
-  renderLoginForm = ( username, password ) => (
-      <LoginView
-          username={username}
-          password={password}
-          onUsernameChange={this.handleUsernameChange}
-          onPasswordChange={this.handlePasswordChange}
-          onSubmit={this.handleSubmit}
-      />
-  );
+    renderLoginForm = ( username, password ) => (
+        <LoginView
+            username={username}
+            password={password}
+            onUsernameChange={this.handleUsernameChange}
+            onPasswordChange={this.handlePasswordChange}
+            onSubmit={this.handleSubmit}
+        />
+    );
 
-  render() {
-      const { username, password, isLoading } = this.state;
-      if ( isLoading ) return this.renderLoader();
-      return this.renderLoginForm( username, password );
-  }
+    render() {
+        const { username, password, isLoading } = this.state;
+        if ( isLoading ) return this.renderLoader();
+        return this.renderLoginForm( username, password );
+    }
 }
 
 LoginContainer.propTypes = {
     onSubmit: PropTypes.func,
+    setUser: PropTypes.func,
 };
 
 LoginContainer.defaultProps = {
     onSubmit: undefined,
+    setUser: undefined,
 };
 
 export default LoginContainer;

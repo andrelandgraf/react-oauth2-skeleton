@@ -24,8 +24,8 @@ export const logUserIn = ( username, password ) => {
     const header = getOAuthHeader( clientId, clientSecret );
     return postAuthRequest( '', qs.stringify( data ), header )
         .then( ( res ) => {
-            setStoredAuthToken( res.data.access_token );
-            setStoredRefreshToken( res.data.refresh_token );
+            setStoredAuthToken( res.data.accessToken );
+            setStoredRefreshToken( res.data.refreshToken );
             return res.data.user;
         } )
         .catch( ( err ) => {
@@ -61,4 +61,4 @@ export const logUserOut = () => {
     window.localStorage.removeItem( 'refreshToken' );
 };
 
-export const isAuthenticated = !!getStoredAuthToken();
+export const isAuthenticated = () => !!getStoredAuthToken();
