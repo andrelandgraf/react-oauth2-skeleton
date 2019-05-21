@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-state */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -10,26 +11,20 @@ class UserStateProvider extends React.Component {
         super( props );
         this.state = {
             user: undefined,
+            setUser: ( user ) => {
+                this.setState( { user } );
+            },
         };
     }
 
-  setUser = ( user ) => {
-      this.setState( { user } );
-  }
-
-  render() {
-      const { children } = this.props;
-      const { user } = this.state;
-      return (
-          <UserStateContext.Provider value={{
-              user,
-              setUser: this.setUser,
-          }}
-          >
-              {children}
-          </UserStateContext.Provider>
-      );
-  }
+    render() {
+        const { children } = this.props;
+        return (
+            <UserStateContext.Provider value={this.state}>
+                {children}
+            </UserStateContext.Provider>
+        );
+    }
 }
 
 UserStateProvider.propTypes = {

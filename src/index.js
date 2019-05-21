@@ -6,6 +6,7 @@ import App from './js/container/App/App';
 import { UserStateContext, UserStateProvider } from './js/provider/UserStateProvider';
 import * as serviceWorker from './js/serviceWorker';
 
+
 const application = (
     <UserStateProvider>
         <UserStateContext.Consumer>
