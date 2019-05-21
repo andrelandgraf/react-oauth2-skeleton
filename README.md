@@ -1,7 +1,18 @@
 # foodoo-frontend
-foodoo-frontend
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Getting started
+
+### `npm install``
+
+Install all third party dependencies. See `package.json` for more information.
+
+### setup .env
+
+Create a new file called `.env` and `.env.development` and copy the template from `EXAMPLE.env` and `EXAMPLE.env.development`. Ask your co-contributors for the secrets and save them to your .env files. Please make sure that you keep the .env file private and do not share the information in the file with anyone. Do not add `.env` to git! 
+
+Important! We ejected out of create-react-app but we still use the create-react-app configs, e.g. see `./config && ./scripts`. Create-react-app does only allow custom env. variables that start with `EACT_APP_`. Please make sure that you name your custom env-variables accordingly. 
 
 ## Available Scripts
 
