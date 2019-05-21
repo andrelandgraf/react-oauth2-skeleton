@@ -69,9 +69,6 @@
     "test": "node scripts/test.js",
     "deploy": "npm run build && aws s3 sync build/ s3://serverless-foodoo-react-app"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": {
     "production": [
       ">0.2%",
