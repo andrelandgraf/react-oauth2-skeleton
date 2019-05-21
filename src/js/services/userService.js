@@ -1,6 +1,6 @@
-import { GRANT_TYPES, getOAuthHeader, postAuthRequest } from './oAuthService';
+import qs from 'qs';
 
-const qs = require( 'qs' );
+import { GRANT_TYPES, getOAuthHeader, postAuthRequest } from './oAuthService';
 
 const setStoredRefreshToken = ( refreshToken ) => {
     window.localStorage.refreshToken = refreshToken;
