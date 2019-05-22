@@ -22,8 +22,8 @@ a {
 
 h1 {
   color: $font-color;
-  font-size: 36px;
-  font-weight: 500;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-medium;
 }
 
 p {

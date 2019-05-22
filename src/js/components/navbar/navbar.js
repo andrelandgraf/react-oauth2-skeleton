@@ -12,7 +12,7 @@ const NavBar = ( { items, currentPathName } ) => (
                     key={key}
                     viewName={viewName}
                     link={link}
-                    isCurrentView={currentPathName === viewName}
+                    isCurrentView={currentPathName === link}
                 />
             ) )
         }
