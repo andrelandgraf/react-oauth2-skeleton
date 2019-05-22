@@ -6,7 +6,7 @@ import LoginForm from '../components/login/loginForm';
 const LoginView = ( {
     username, password, onUsernameChange, onPasswordChange, onSubmit, pageName, actionName,
 } ) => (
-    <div className="login-container">
+    <div className="container login-container">
         <h1>{`Hello World! Welcome to our ${ pageName } Page`}</h1>
         <LoginForm
             actionName={actionName}

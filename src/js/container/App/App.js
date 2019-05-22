@@ -15,16 +15,19 @@ import Loader from '../../components/loading/loader';
 import { isAuthenticated, getUser } from '../../services/userService';
 
 class App extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            currentPathName: window.location.pathname,
+        };
+    }
+
     componentWillMount = async () => {
         const { user, setUser } = this.context;
-        if ( !isAuthenticated() || user ) return;
-        await getUser()
-            .then( retrievedUser => setUser( retrievedUser ) )
-            .catch( () => {
-                console.log( ' err while getting user' );
-                // clear storage, this will lead to relocate to /login
-                window.localStorage.clear();
-            } );
+        const { pathname } = window.location;
+        this.updatePathName( pathname );
+        // in case of page reload, we still hold token but need to get user again
+        if ( isAuthenticated() && !user ) this.getUser( setUser );
     }
 
     getNavBarViews = () => [
@@ -45,6 +48,21 @@ class App extends React.Component {
         return null;
     };
 
+    updatePathName = ( pathName ) => {
+        const { currentPathName } = this.state;
+        if ( pathName === currentPathName ) return;
+        this.setState( { currentPathName: pathName } );
+    }
+
+    getUser = async ( setUser ) => {
+        await getUser()
+            .then( retrievedUser => setUser( retrievedUser ) )
+            .catch( () => {
+                // in case of error, relocate to login and retrieve new token
+                window.localStorage.clear();
+            } );
+    }
+
     renderAppLoading = () => (
         <Loader />
     );
@@ -64,13 +82,13 @@ class App extends React.Component {
         </Switch>
     );
 
-    renderAuthenticatedApp = user => (
-        <div>
-            <NavBar items={this.getNavBarViews()} current={window.location.pathname} />
+    renderAuthenticatedApp = ( user, currentPathName ) => (
+        <React.Fragment>
+            <NavBar items={this.getNavBarViews()} currentPathName={currentPathName} />
             {
                 user ? this.renderApp( user ) : this.renderAppLoading()
             }
-        </div>
+        </React.Fragment>
     );
 
     renderNotAuthenticatedApp = setUser => (
@@ -93,7 +111,7 @@ class App extends React.Component {
     )
 
     render() {
-        const { scrollToTop } = this;
+        const { currentPathName } = this.state;
         const { user, setUser } = this.context;
 
         if ( !isAuthenticated() ) {
@@ -104,9 +122,9 @@ class App extends React.Component {
         return (
             <Router>
                 <div>
-                    <Route component={scrollToTop} />
+                    <Route component={this.scrollToTop} />
                     { isAuthenticated()
-                        ? this.renderAuthenticatedApp( user )
+                        ? this.renderAuthenticatedApp( user, currentPathName )
                         : this.renderNotAuthenticatedApp( setUser )
                     }
                 </div>

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import LogoutContainer from '../../container/Logout/LogoutContainer';
 import NavBarItem from './navbarItem';
 
-const NavBar = ( { items, current } ) => (
+const NavBar = ( { items, currentPathName } ) => (
     <ul className="navarbar">
         {
             items.map( ( { key, viewName, link } ) => (
@@ -12,7 +12,7 @@ const NavBar = ( { items, current } ) => (
                     key={key}
                     viewName={viewName}
                     link={link}
-                    isCurrentView={current === viewName}
+                    isCurrentView={currentPathName === viewName}
                 />
             ) )
         }
@@ -23,7 +23,7 @@ const NavBar = ( { items, current } ) => (
 );
 
 NavBar.propTypes = {
-    current: PropTypes.string.isRequired,
+    currentPathName: PropTypes.string.isRequired,
     items: PropTypes.arrayOf(
         PropTypes.shape( {
             key: PropTypes.string.isRequired,

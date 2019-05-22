@@ -2,13 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const HomeView = ( { user } ) => (
-    <div>
-        <div>
-      Hello World!
-            {' '}
-            { user.username }
-            {' '}
-      Welcome on our Home Pages
+    <div className="container">
+        <div className="center">
+            {`Hello World!${ user.username } Welcome on our Home Pages`}
         </div>
     </div>
 );
