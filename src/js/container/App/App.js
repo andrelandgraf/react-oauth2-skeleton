@@ -31,16 +31,33 @@ class App extends React.Component {
         if ( isAuthenticated() && !user ) this.getUser( setUser );
     }
 
-    getNavBarViews = () => [
+    getAuthenticatedNavBarViews = () => [
         {
             key: 'home',
             viewName: 'Home',
             link: '/',
+            float: 'left',
         },
         {
             key: 'profile',
             viewName: 'My Profile',
             link: '/profile',
+            float: 'left',
+        },
+    ];
+
+    getNotAuthenticatedNavBarViews = () => [
+        {
+            key: 'register',
+            viewName: 'Register',
+            link: '/register',
+            float: 'right',
+        },
+        {
+            key: 'login',
+            viewName: 'Log-in',
+            link: '/login',
+            float: 'right',
         },
     ];
 
@@ -92,30 +109,39 @@ class App extends React.Component {
 
     renderAuthenticatedApp = ( user, currentPathName ) => (
         <React.Fragment>
-            <NavBar items={this.getNavBarViews()} currentPathName={currentPathName} />
+            <NavBar
+                items={this.getAuthenticatedNavBarViews()}
+                currentPathName={currentPathName}
+            />
             {
                 user ? this.renderApp( user ) : this.renderAppLoading()
             }
         </React.Fragment>
     );
 
-    renderNotAuthenticatedApp = setUser => (
-        <Switch>
-            <Route
-                from="/login"
-                render={props => (
-                    <LoginContainer {...props} setUser={setUser} />
-                )}
+    renderNotAuthenticatedApp = ( setUser, currentPathName ) => (
+        <React.Fragment>
+            <NavBar
+                items={this.getNotAuthenticatedNavBarViews()}
+                currentPathName={currentPathName}
             />
-            <Route
-                from="/register"
-                render={props => (
-                    <RegistrationContainer {...props} setUser={setUser} />
-                )}
-            />
-            <Route from="/oauth/v2/login" component={OAuthContainer} />
-            <Redirect path="*" to="/login" />
-        </Switch>
+            <Switch>
+                <Route
+                    from="/login"
+                    render={props => (
+                        <LoginContainer {...props} setUser={setUser} />
+                    )}
+                />
+                <Route
+                    from="/register"
+                    render={props => (
+                        <RegistrationContainer {...props} setUser={setUser} />
+                    )}
+                />
+                <Route from="/oauth/v2/login" component={OAuthContainer} />
+                <Redirect path="*" to="/login" />
+            </Switch>
+        </React.Fragment>
     )
 
     render() {
@@ -133,7 +159,7 @@ class App extends React.Component {
                     <Route component={this.scrollToTop} />
                     { isAuthenticated()
                         ? this.renderAuthenticatedApp( user, currentPathName )
-                        : this.renderNotAuthenticatedApp( setUser )
+                        : this.renderNotAuthenticatedApp( setUser, currentPathName )
                     }
                 </div>
             </Router>

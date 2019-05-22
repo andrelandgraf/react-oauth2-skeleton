@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 
 import { logUserOut } from '../../services/userService';
 
-const LogoutButton = ( { setUser } ) => (
+const LogoutButton = ( { setUser, loggedIn } ) => (
     <div
+        className={loggedIn ? undefined : 'not-displayed'}
         id="logout-button"
         tabIndex={0}
         role="button"
@@ -28,6 +29,7 @@ const LogoutButton = ( { setUser } ) => (
 
 LogoutButton.propTypes = {
     setUser: PropTypes.func.isRequired,
+    loggedIn: PropTypes.bool.isRequired,
 };
 
 export default LogoutButton;

@@ -6,15 +6,17 @@ import NavBarItem from './navbarItem';
 
 const NavBar = ( { items, currentPathName } ) => (
     <ul className="navarbar">
-        {
-            items.map( ( { key, viewName, link } ) => (
-                <NavBarItem
-                    key={key}
-                    viewName={viewName}
-                    link={link}
-                    isCurrentView={currentPathName === link}
-                />
-            ) )
+        { items.map( ( {
+            key, viewName, link, float,
+        } ) => (
+            <NavBarItem
+                key={key}
+                viewName={viewName}
+                link={link}
+                isCurrentView={currentPathName === link}
+                float={float}
+            />
+        ) )
         }
         <li className="logout-item">
             <LogoutContainer />
@@ -29,6 +31,7 @@ NavBar.propTypes = {
             key: PropTypes.string.isRequired,
             viewName: PropTypes.string.isRequired,
             link: PropTypes.string.isRequired,
+            float: PropTypes.string.isRequired,
         } ),
     ).isRequired,
 };
