@@ -49,7 +49,11 @@ export const registerUser = ( username, password ) => {
     };
     return postRequest( REGISTER_ENDPOINT, data )
         // will return user object to initial caller of registerUser
-        .then( () => logUserIn( username, password ) );
+        .then( () => logUserIn( username, password ) )
+        .catch( ( err ) => {
+            LoggingUtility.error( 'Error while registering new user', err );
+            throw Error( 'Unable to register' );
+        } );
 };
 
 export const oAuthUser = ( username, password, state, clientId, redirectUri ) => {

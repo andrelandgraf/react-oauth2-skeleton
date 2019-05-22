@@ -9,7 +9,7 @@ const HomeView = ( { user } ) => (
         <div>
       Hello World!
             {' '}
-            { user.email }
+            { user.username }
             {' '}
       Welcome on our Home Pages
         </div>
@@ -19,7 +19,7 @@ const HomeView = ( { user } ) => (
 
 HomeView.propTypes = {
     user: PropTypes.shape( {
-        email: PropTypes.string.isRequired,
+        username: PropTypes.string.isRequired,
         id: PropTypes.string.isRequired,
     } ).isRequired,
 };

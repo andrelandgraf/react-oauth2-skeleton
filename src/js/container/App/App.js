@@ -81,7 +81,7 @@ class App extends React.Component {
 
 App.propTypes = {
     user: PropTypes.shape( {
-        email: PropTypes.string.isRequired,
+        username: PropTypes.string.isRequired,
         id: PropTypes.string.isRequired,
     } ),
     setUser: PropTypes.func.isRequired,
