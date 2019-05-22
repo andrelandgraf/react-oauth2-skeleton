@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const HomeView = ( { user } ) => (
+const ProfileView = ( { user } ) => (
     <div className="container">
         <div className="center">
-            <h1>{`Hi, ${ user.username }! Welcome on your Home Page!`}</h1>
+            <h1>{`Welcome on your My Profile Page, ${ user.username }!`}</h1>
         </div>
     </div>
 );
 
-HomeView.propTypes = {
+ProfileView.propTypes = {
     user: PropTypes.shape( {
         username: PropTypes.string.isRequired,
         id: PropTypes.string.isRequired,
     } ).isRequired,
 };
 
-export default HomeView;
+export default ProfileView;

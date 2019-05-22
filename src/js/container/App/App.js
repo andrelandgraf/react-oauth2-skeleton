@@ -7,6 +7,7 @@ import { UserStateContext } from '../../provider/UserStateProvider';
 
 import NavBar from '../../components/navbar/navbar';
 import HomeView from '../../views/homeView';
+import ProfileView from '../../views/profileView';
 import LoginContainer from '../Login/LoginContainer';
 import RegistrationContainer from '../Registration/RegistrationContainer';
 import OAuthContainer from '../OAuth/OAuthContainer';
@@ -74,6 +75,13 @@ class App extends React.Component {
                 path="/"
                 render={props => (
                     <HomeView {...props} user={user} />
+                )}
+            />
+            <Route
+                exact
+                path="/profile"
+                render={props => (
+                    <ProfileView {...props} user={user} />
                 )}
             />
             <Route from="/oauth/v2/login" component={OAuthContainer} />
