@@ -1,0 +1,29 @@
+.message-box {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-light;
+    text-align: center;
+
+    div {
+        float: right;
+
+        img {
+            width: 15px;
+            height: 15px;
+        }
+    }
+
+    &.err-message {
+        background-color: #ffdce0;
+        color: #86181d;
+    }
+    
+    &.warning-message {
+        background-color: #ffdce0;
+        color: #86181d;
+    }
+    
+    &.info-message {
+        background-color: #ffdce0;
+        color: #86181d;
+    }
+}

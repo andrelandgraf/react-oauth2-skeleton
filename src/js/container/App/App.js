@@ -16,17 +16,8 @@ import Loader from '../../components/loading/loader';
 import { isAuthenticated, getUser } from '../../services/userService';
 
 class App extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            currentPathName: window.location.pathname,
-        };
-    }
-
     componentWillMount = async () => {
         const { user, setUser } = this.context;
-        const { pathname } = window.location;
-        this.updatePathName( pathname );
         // in case of page reload, we still hold token but need to get user again
         if ( isAuthenticated() && !user ) this.getUser( setUser );
     }
@@ -66,12 +57,6 @@ class App extends React.Component {
         return null;
     };
 
-    updatePathName = ( pathName ) => {
-        const { currentPathName } = this.state;
-        if ( pathName === currentPathName ) return;
-        this.setState( { currentPathName: pathName } );
-    }
-
     getUser = async ( setUser ) => {
         await getUser()
             .then( retrievedUser => setUser( retrievedUser ) )
@@ -107,11 +92,10 @@ class App extends React.Component {
         </Switch>
     );
 
-    renderAuthenticatedApp = ( user, currentPathName ) => (
+    renderAuthenticatedApp = user => (
         <React.Fragment>
             <NavBar
                 items={this.getAuthenticatedNavBarViews()}
-                currentPathName={currentPathName}
             />
             {
                 user ? this.renderApp( user ) : this.renderAppLoading()
@@ -119,11 +103,10 @@ class App extends React.Component {
         </React.Fragment>
     );
 
-    renderNotAuthenticatedApp = ( setUser, currentPathName ) => (
+    renderNotAuthenticatedApp = setUser => (
         <React.Fragment>
             <NavBar
                 items={this.getNotAuthenticatedNavBarViews()}
-                currentPathName={currentPathName}
             />
             <Switch>
                 <Route
@@ -145,7 +128,6 @@ class App extends React.Component {
     )
 
     render() {
-        const { currentPathName } = this.state;
         const { user, setUser } = this.context;
 
         if ( !isAuthenticated() ) {
@@ -158,8 +140,8 @@ class App extends React.Component {
                 <div>
                     <Route component={this.scrollToTop} />
                     { isAuthenticated()
-                        ? this.renderAuthenticatedApp( user, currentPathName )
-                        : this.renderNotAuthenticatedApp( setUser, currentPathName )
+                        ? this.renderAuthenticatedApp( user )
+                        : this.renderNotAuthenticatedApp( setUser )
                     }
                 </div>
             </Router>

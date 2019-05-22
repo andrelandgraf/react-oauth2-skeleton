@@ -42,7 +42,6 @@ export const getRequest = endpoint => axios
     .get( API + endpoint, { headers: getHeader( getStoredAuthToken() ) } )
     .then( res => res.data )
     .catch( ( err ) => {
-        console.log( err );
         LoggingUtility.error( `Error in get request to entpoint ${ endpoint }`, err );
         throw Error( `${ err.response.data.code }:${ err.response.message }` );
     } );

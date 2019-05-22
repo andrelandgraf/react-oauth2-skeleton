@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import LoginView from '../../views/loginView';
+import MessageComponent, { MESSAGE_TYPES } from '../../components/message/message';
 
 import { logUserIn } from '../../services/userService';
 
@@ -12,6 +13,8 @@ class LoginContainer extends React.Component {
             username: '',
             password: '',
             isLoading: false,
+            message: '',
+            messageType: undefined,
         };
     }
 
@@ -39,9 +42,11 @@ class LoginContainer extends React.Component {
                     setUser( user );
                 } )
                 .catch( () => {
-                    this.setState( { isLoading: false } );
-                    // eslint-disable-next-line no-alert
-                    alert( 'err while trying to login, pls try again' );
+                    this.setState( {
+                        isLoading: false,
+                        message: 'Wrong password or username, please try again.',
+                        messageType: MESSAGE_TYPES.ERR,
+                    } );
                     return false;
                 } );
         } else {
@@ -51,16 +56,25 @@ class LoginContainer extends React.Component {
         return true;
     }
 
+    clearMessage = () => {
+        this.setState( { message: '' } );
+    }
+
+    renderMessage = ( message, messageType ) => (
+        <MessageComponent type={messageType} text={message} onResolve={this.clearMessage} />
+    )
+
     renderLoader = () => (
         <div>Loading...</div>
     );
 
-    renderLoginForm = ( username, password, pageName, actionName ) => (
+    renderLoginForm = ( username, password, pageName, actionName, Message ) => (
         <LoginView
             pageName={pageName}
             actionName={actionName}
             username={username}
             password={password}
+            Message={Message}
             onUsernameChange={this.handleUsernameChange}
             onPasswordChange={this.handlePasswordChange}
             onSubmit={this.handleSubmit}
@@ -68,10 +82,14 @@ class LoginContainer extends React.Component {
     );
 
     render() {
-        const { username, password, isLoading } = this.state;
+        const {
+            username, password, isLoading, message, messageType,
+        } = this.state;
+        let Message;
+        if ( message ) { Message = this.renderMessage( message, messageType ); }
         const { pageName, actionName } = this.props;
         if ( isLoading ) return this.renderLoader();
-        return this.renderLoginForm( username, password, pageName, actionName );
+        return this.renderLoginForm( username, password, pageName, actionName, Message );
     }
 }
 
