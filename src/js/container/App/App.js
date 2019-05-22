@@ -1,94 +1,120 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
     BrowserRouter as Router, Route, Redirect, Switch,
 } from 'react-router-dom';
 
+import { UserStateContext } from '../../provider/UserStateProvider';
+
+import NavBar from '../../components/navbar/navbar';
 import HomeView from '../../views/homeView';
 import LoginContainer from '../Login/LoginContainer';
 import RegistrationContainer from '../Registration/RegistrationContainer';
 import OAuthContainer from '../OAuth/OAuthContainer';
+import Loader from '../../components/loading/loader';
 
-import { isAuthenticated } from '../../services/userService';
+import { isAuthenticated, getUser } from '../../services/userService';
 
 class App extends React.Component {
-    constructor( props ) {
-        super( props );
-
-        // on initial app startup
-        // To avoid getting max. depth exceeded exception in case of successful token generation:
-        window.localStorage.clear();
+    componentWillMount = async () => {
+        const { user, setUser } = this.context;
+        if ( !isAuthenticated() || user ) return;
+        await getUser()
+            .then( retrievedUser => setUser( retrievedUser ) )
+            .catch( () => {
+                console.log( ' err while getting user' );
+                // clear storage, this will lead to relocate to /login
+                window.localStorage.clear();
+            } );
     }
 
-  scrollToTop = () => {
-      window.scrollTo( 0, 0 );
-      return null;
-  };
+    getNavBarViews = () => [
+        {
+            key: 'home',
+            viewName: 'Home',
+            link: '/',
+        },
+        {
+            key: 'profile',
+            viewName: 'My Profile',
+            link: '/profile',
+        },
+    ];
 
-  render() {
-      const { scrollToTop } = this;
-      const { user, setUser } = this.props;
+    scrollToTop = () => {
+        window.scrollTo( 0, 0 );
+        return null;
+    };
 
-      if ( !isAuthenticated() ) {
-          let redirectUrl = window.location.pathname;
-          if ( redirectUrl === '/login' || redirectUrl === '/register' ) redirectUrl = '/';
-          window.localStorage.setItem( 'redirectUrl', redirectUrl );
-      }
+    renderAppLoading = () => (
+        <Loader />
+    );
 
-      return (
-          <Router>
-              <div>
-                  <Route component={scrollToTop} />
-                  { isAuthenticated()
-                      ? (
-                          <Switch>
-                              <Route
-                                  exact
-                                  path="/"
-                                  render={props => (
-                                      <HomeView {...props} user={user} />
-                                  )}
-                              />
-                              <Route from="/oauth/v2/login" component={OAuthContainer} />
-                              <Redirect from="/login" to={window.localStorage.getItem( 'redirectUrl' )} />
-                              <Redirect from="/register" to={window.localStorage.getItem( 'redirectUrl' )} />
-                          </Switch>
-                      )
-                      : (
-                          <Switch>
-                              <Route
-                                  from="/login"
-                                  render={props => (
-                                      <LoginContainer {...props} setUser={setUser} />
-                                  )}
-                              />
-                              <Route
-                                  from="/register"
-                                  render={props => (
-                                      <RegistrationContainer {...props} setUser={setUser} />
-                                  )}
-                              />
-                              <Route from="/oauth/v2/login" component={OAuthContainer} />
-                              <Redirect path="*" to="/login" />
-                          </Switch>
-                      )
-                  }
-              </div>
-          </Router>
-      );
-  }
+    renderApp = user => (
+        <Switch>
+            <Route
+                exact
+                path="/"
+                render={props => (
+                    <HomeView {...props} user={user} />
+                )}
+            />
+            <Route from="/oauth/v2/login" component={OAuthContainer} />
+            <Redirect from="/login" to={window.localStorage.getItem( 'redirectUrl' )} />
+            <Redirect from="/register" to={window.localStorage.getItem( 'redirectUrl' )} />
+        </Switch>
+    );
+
+    renderAuthenticatedApp = user => (
+        <div>
+            <NavBar items={this.getNavBarViews()} current={window.location.pathname} />
+            {
+                user ? this.renderApp( user ) : this.renderAppLoading()
+            }
+        </div>
+    );
+
+    renderNotAuthenticatedApp = setUser => (
+        <Switch>
+            <Route
+                from="/login"
+                render={props => (
+                    <LoginContainer {...props} setUser={setUser} />
+                )}
+            />
+            <Route
+                from="/register"
+                render={props => (
+                    <RegistrationContainer {...props} setUser={setUser} />
+                )}
+            />
+            <Route from="/oauth/v2/login" component={OAuthContainer} />
+            <Redirect path="*" to="/login" />
+        </Switch>
+    )
+
+    render() {
+        const { scrollToTop } = this;
+        const { user, setUser } = this.context;
+
+        if ( !isAuthenticated() ) {
+            let redirectUrl = window.location.pathname;
+            if ( redirectUrl === '/login' || redirectUrl === '/register' ) redirectUrl = '/';
+            window.localStorage.setItem( 'redirectUrl', redirectUrl );
+        }
+        return (
+            <Router>
+                <div>
+                    <Route component={scrollToTop} />
+                    { isAuthenticated()
+                        ? this.renderAuthenticatedApp( user )
+                        : this.renderNotAuthenticatedApp( setUser )
+                    }
+                </div>
+            </Router>
+        );
+    }
 }
 
-App.propTypes = {
-    user: PropTypes.shape( {
-        username: PropTypes.string.isRequired,
-        id: PropTypes.string.isRequired,
-    } ),
-    setUser: PropTypes.func.isRequired,
-};
-
-App.defaultProps = {
-    user: undefined,
-};
+App.contextType = UserStateContext;
 
 export default App;

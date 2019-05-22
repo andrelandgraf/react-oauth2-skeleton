@@ -3,7 +3,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // new context
-const UserStateContext = React.createContext();
+const UserStateContext = React.createContext( {
+    user: undefined,
+    setUser: () => {},
+} );
 
 // corresponding provider component
 class UserStateProvider extends React.Component {

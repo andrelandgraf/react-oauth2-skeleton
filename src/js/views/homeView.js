@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// import logo from '../../img/logo.svg';
-import LogoutContainer from '../container/Logout/LogoutContainer';
-
 const HomeView = ( { user } ) => (
     <div>
         <div>
@@ -13,7 +10,6 @@ const HomeView = ( { user } ) => (
             {' '}
       Welcome on our Home Pages
         </div>
-        <LogoutContainer />
     </div>
 );
 

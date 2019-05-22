@@ -1,0 +1,49 @@
+.navarbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: $light-black;
+
+    li {
+        float: left;
+
+        a {
+            display: block;
+            color: $white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+    
+            /* Change the link color to #111 (black) on hover */
+            &:hover {
+                background-color: $black;
+            }
+    
+            &.current-page {
+                pointer-events: none;
+                cursor: default;
+                text-decoration: none;
+                background-color: $grey-base;
+                color: black;
+            }
+        }
+
+        &.logout-item {
+            float: right;
+
+            div {
+                display: block;
+                color: $white;
+                text-align: center;
+                padding: 14px 16px;
+                cursor: pointer;
+        
+                /* Change the link color to #111 (black) on hover */
+                &:hover {
+                    background-color: $black;
+                }
+            }
+        }
+    }
+}

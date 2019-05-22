@@ -2,13 +2,13 @@ import qs from 'qs';
 
 import Logger from '../utilities/Logger';
 import { GRANT_TYPES, getOAuthHeader, postAuthRequest } from './oAuthService';
-import { postRequest } from './httpService';
+import { postRequest, getRequest } from './httpService';
 
 const LoggingUtility = new Logger( 'userService.js' );
 
 const REGISTER_ENDPOINT = 'auth/register';
 // not in use as we receive user obj on authentification
-// const USER_ENDPOINT = 'auth/me';
+const USER_ENDPOINT = 'auth/me';
 
 const setStoredRefreshToken = ( refreshToken ) => {
     window.localStorage.refreshToken = refreshToken;
@@ -77,6 +77,8 @@ export const oAuthUser = ( username, password, state, clientId, redirectUri ) =>
             throw Error( 'Unable to logIn, please check your username and password' );
         } );
 };
+
+export const getUser = () => getRequest( USER_ENDPOINT );
 
 export const logUserOut = () => {
     window.localStorage.removeItem( 'authToken' );

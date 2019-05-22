@@ -35,12 +35,14 @@ export const postRequest = ( endpoint, data ) => axios
     } )
     .catch( ( err ) => {
         LoggingUtility.error( `Error in post request to entpoint ${ endpoint }`, err );
-        return err.response.data.code;
+        throw Error( `${ err.response.data.code }:${ err.response.message }` );
     } );
 
-export const getRequest = ( endpoint, authToken ) => axios
-    .get( API + endpoint, { headers: getHeader( authToken ) } )
-    .then( res => res.data ).catch( ( err ) => {
+export const getRequest = endpoint => axios
+    .get( API + endpoint, { headers: getHeader( getStoredAuthToken() ) } )
+    .then( res => res.data )
+    .catch( ( err ) => {
+        console.log( err );
         LoggingUtility.error( `Error in get request to entpoint ${ endpoint }`, err );
-        return err.response.data.code;
+        throw Error( `${ err.response.data.code }:${ err.response.message }` );
     } );

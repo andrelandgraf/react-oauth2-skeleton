@@ -4,18 +4,26 @@ import PropTypes from 'prop-types';
 import { logUserOut } from '../../services/userService';
 
 const LogoutButton = ( { setUser } ) => (
-    <button
-        className="clickable button-center"
-        type="button"
+    <div
+        id="logout-button"
+        tabIndex={0}
+        role="button"
         onClick={() => {
             // delete tokens in local storage
             logUserOut();
             // ovveride user object and trigger rerender of App
             setUser( undefined );
         }}
+        onKeyUp={( event ) => {
+            if ( event.keyCode === 13 ) {
+                event.preventDefault();
+                // Trigger the button element with a click
+                document.getElementById( 'logout-button' ).click();
+            }
+        }}
     >
         Log out
-    </button>
+    </div>
 );
 
 LogoutButton.propTypes = {
