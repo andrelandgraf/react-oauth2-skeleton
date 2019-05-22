@@ -31,7 +31,7 @@ class App extends React.Component {
 
       if ( !isAuthenticated() ) {
           let redirectUrl = window.location.pathname;
-          if ( redirectUrl === '/login' ) redirectUrl = '/';
+          if ( redirectUrl === '/login' || redirectUrl === '/register' ) redirectUrl = '/';
           window.localStorage.setItem( 'redirectUrl', redirectUrl );
       }
 
