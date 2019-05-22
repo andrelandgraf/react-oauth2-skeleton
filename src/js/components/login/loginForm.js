@@ -16,6 +16,7 @@ const LoginForm = ( {
         />
         <input
             type="password"
+            placeholder="your password"
             value={password}
             onChange={onPasswordChange}
             pattern=".{1,}"

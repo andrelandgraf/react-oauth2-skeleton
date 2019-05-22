@@ -49,7 +49,9 @@ class App extends React.Component {
                                       <HomeView {...props} user={user} />
                                   )}
                               />
+                              <Route from="/oauth/v2/login" component={OAuthContainer} />
                               <Redirect from="/login" to={window.localStorage.getItem( 'redirectUrl' )} />
+                              <Redirect from="/register" to={window.localStorage.getItem( 'redirectUrl' )} />
                           </Switch>
                       )
                       : (
@@ -60,7 +62,12 @@ class App extends React.Component {
                                       <LoginContainer {...props} setUser={setUser} />
                                   )}
                               />
-                              <Route from="/register" component={RegistrationContainer} />
+                              <Route
+                                  from="/register"
+                                  render={props => (
+                                      <RegistrationContainer {...props} setUser={setUser} />
+                                  )}
+                              />
                               <Route from="/oauth/v2/login" component={OAuthContainer} />
                               <Redirect path="*" to="/login" />
                           </Switch>

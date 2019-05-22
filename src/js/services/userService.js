@@ -2,8 +2,13 @@ import qs from 'qs';
 
 import Logger from '../utilities/Logger';
 import { GRANT_TYPES, getOAuthHeader, postAuthRequest } from './oAuthService';
+import { postRequest } from './httpService';
 
 const LoggingUtility = new Logger( 'userService.js' );
+
+const REGISTER_ENDPOINT = 'auth/register';
+// not in use as we receive user obj on authentification
+// const USER_ENDPOINT = 'auth/me';
 
 const setStoredRefreshToken = ( refreshToken ) => {
     window.localStorage.refreshToken = refreshToken;
@@ -32,7 +37,7 @@ export const logUserIn = ( username, password ) => {
             return res.data.user;
         } )
         .catch( ( err ) => {
-            LoggingUtility.err( 'Error while logging in user', err );
+            LoggingUtility.error( 'Error while logging in user', err );
             throw Error( 'Unable to logIn, please check your username and password' );
         } );
 };
@@ -42,8 +47,9 @@ export const registerUser = ( username, password ) => {
         username,
         password,
     };
-    // TODO call register endpoint
-    console.log( data );
+    return postRequest( REGISTER_ENDPOINT, data )
+        // will return user object to initial caller of registerUser
+        .then( () => logUserIn( username, password ) );
 };
 
 export const oAuthUser = ( username, password, state, clientId, redirectUri ) => {
@@ -63,7 +69,7 @@ export const oAuthUser = ( username, password, state, clientId, redirectUri ) =>
     // after this backend call, the page will redirect automatically to aws/amazon
     return postAuthRequest( '', qs.stringify( data ), header )
         .catch( ( err ) => {
-            LoggingUtility.err( 'Error while authenticating user via oAuth', err );
+            LoggingUtility.error( 'Error while authenticating user via oAuth', err );
             throw Error( 'Unable to logIn, please check your username and password' );
         } );
 };

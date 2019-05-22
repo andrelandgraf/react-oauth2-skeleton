@@ -3,7 +3,8 @@ import axios from 'axios';
 import { API } from './httpService';
 import { getStoredRefreshToken } from './userService';
 
-const AUTH_ENDPOINT = 'oauth/token';
+const AUTH_ENDPOINT = 'auth/token';
+
 export const GRANT_TYPES = {
     AUTH_CODE: 'authorization_code',
     REFRESH_TOKEN: 'refresh_token',
