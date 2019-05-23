@@ -1,19 +1,30 @@
 // Colors
 // ==========================================================================
-$success-color: green;
-$error-color: red;
-$secondary-color: lightblue;
 
 /* Color palette */
 $white: #fff;
 $light-black: #333;
 $black: #111;
 $grey-base: #9e9e9e;
+$light-red: #ffdce0;
+
+$success-background-color: rgb(152, 236, 152);
+$error-background-color: #ffdce0;
+$warning-background-color: rgb(228, 228, 139);
+$info-background-color: $grey-base;
+
+$secondary-color: lightblue;
+
+
 
 // Fonts
 // ==========================================================================
 
 $font-color: black;
+$error-font-color: #86181d;
+$success-font-color: $light-black;
+$warning-font-color: $light-black;
+$info-font-color: $light-black;
 $font-family: "Proxima Nova", sans-serif;
 
 $font-size-xs: 13px;

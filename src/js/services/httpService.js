@@ -7,7 +7,7 @@ import { getStoredAuthToken } from './userService';
 
 const LoggingUtility = new Logger( 'userService.js' );
 
-export const API = isDevelopment ? 'http://localhost:3333/' : 'http://foodoo-backend-api/v1/';
+export const API = isDevelopment ? 'http://localhost:3333/' : process.env.REACT_APP_BACKEND_API;
 
 function getHeader() {
     return {

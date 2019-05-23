@@ -13,17 +13,22 @@
     }
 
     &.err-message {
-        background-color: #ffdce0;
-        color: #86181d;
+        background-color: $err-background-color;
+        color: $er-font-color;
     }
     
     &.warning-message {
-        background-color: #ffdce0;
-        color: #86181d;
+        background-color: $warning-background-color;
+        color: $warning-font-color;
     }
     
     &.info-message {
-        background-color: #ffdce0;
-        color: #86181d;
+        background-color: $info-background-color;
+        color: $info-font-color;
+    }
+
+    &.success-message {
+        background-color: $success-background-color;
+        color: $success-font-color;
     }
 }

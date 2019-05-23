@@ -1,6 +1,11 @@
-# foodoo-frontend
+# react-oauth2-skeleton
+
+## What is this repository for?
+
+This repository provides a skeleton application that you can fork to quick-start your own React app! 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+=> we ejected react app!
 
 ## Getting started
 
@@ -20,9 +25,9 @@ Install all third party dependencies. See `package.json` for more information.
 
 ### setup .env
 
-Create a new file called `.env` and `.env.development` and copy the template from `EXAMPLE.env` and `EXAMPLE.env.development`. Ask your co-contributors for the secrets and save them to your .env files. Please make sure that you keep the .env file private and do not share the information in the file with anyone. Do not add `.env` to git! 
+Create a new file called `.env` and `.env.development` and copy the template from `EXAMPLE.env` and `EXAMPLE.env.development`. If you forked this repository, it is on you to invent secrets and save required secrets accordingly. If you are part of a team, than ask your co-contributors for the secrets and save them to your .env files. Please make sure that you keep the .env file private and do not share the information in the file with anyone. Do not add `.env` to git! 
 
-Important! We ejected out of create-react-app but we still use the create-react-app configs, e.g. see `./config && ./scripts`. Create-react-app does only allow custom env. variables that start with `EACT_APP_`. Please make sure that you name your custom env-variables accordingly. 
+Important! We ejected out of create-react-app but we still use the create-react-app configs, e.g. see `./config && ./scripts`. Create-react-app does only allow custom env. variables that start with `REACT_APP_`. Please make sure that you name your custom env-variables accordingly. 
 
 ## Available Scripts
 
@@ -81,12 +86,12 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/ad
 
 ### Deployment
 
-Use the AWS command-line-interface to deploy the react web app. 
+Use the AWS command-line-interface to deploy the react web app. If you want to quickly host your application, you can do so on a AWS S3 bucket. Make sure you have a AWS developer account and create your access keys via the AWS console. There are plenty of nice guides out there on how to create a S3 bucket for static web hosting! Just set up your own bucket and also create yoruself secret & access keys for CLI access and follow this quick guideline: 
 
 - First install awscli via: `brew install awscli`
 - Run `aws configure` and configure the access keys (use eu-west-1 as your region).
 - Run `npm run deploy` to push the repository to the AWS S3 bucket.
-- Check out the app under: http://serverless-foodoo-react-app.s3-website-eu-west-1.amazonaws.com
+- Check out the app under: http://your-app-name.s3-website-eu-west-1.amazonaws.com
 
 ### `npm run build` fails to minify
 

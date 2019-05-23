@@ -1,7 +1,8 @@
 {
-  "name": "foodoo-frontend",
-  "version": "0.1.0",
-  "private": true,
+  "name": "react-oauth2-skeleton",
+  "version": "1.0.0",
+  "private": false,
+  "author": "Andre Landgraf, Andre Weinkötz",
   "dependencies": {
     "@babel/core": "7.4.3",
     "@svgr/webpack": "4.1.0",
@@ -68,7 +69,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "deploy": "npm run build && aws s3 sync build/ s3://serverless-foodoo-react-app"
+    "deploy": "npm run build && aws s3 sync build/ s3://<bucket-app-name>"
   },
   "browserslist": {
     "production": [
