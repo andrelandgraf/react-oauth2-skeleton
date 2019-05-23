@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "private": false,
   "author": "Andre Landgraf, Andre Weinkötz",
+  "description": "A skeleton app to get you up and running in no time! We <3 oAuth2!",
+  "bugs": {
+    "url": "https://github.com/andrelandgraf/react-oauth2-skeleton/issues"
+  },
+  "homepage": "https://github.com/andrelandgraf/react-oauth2-skeleton#readme",
   "dependencies": {
     "@babel/core": "7.4.3",
     "@svgr/webpack": "4.1.0",
