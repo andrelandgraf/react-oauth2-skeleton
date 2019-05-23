@@ -13,8 +13,8 @@
     }
 
     &.err-message {
-        background-color: $err-background-color;
-        color: $er-font-color;
+        background-color: $error-background-color;
+        color: $error-font-color;
     }
     
     &.warning-message {

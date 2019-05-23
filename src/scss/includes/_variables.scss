@@ -10,8 +10,8 @@ $light-red: #ffdce0;
 
 $success-background-color: rgb(152, 236, 152);
 $error-background-color: #ffdce0;
-$warning-background-color: rgb(228, 228, 139);
-$info-background-color: $grey-base;
+$warning-background-color: rgb(255, 255, 75);
+$info-background-color: $white;
 
 $secondary-color: lightblue;
 
@@ -49,8 +49,8 @@ $input-height: 3rem;
 $input-border-color: $grey-base;
 $input-border: 1px solid $input-border-color;
 $input-background: #fff;
-$input-error-color: $error-color;
-$input-success-color: $success-color;
+$input-error-color: $error-background-color;
+$input-success-color: $success-background-color;
 $input-focus-color: $secondary-color;
 $input-font-size: 1rem;
 $input-margin: 0 0 20px 0;

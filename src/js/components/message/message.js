@@ -6,6 +6,7 @@ import Cancel from '../../../img/cancel.svg';
 import ImageButton from '../button/imageButton';
 
 export const MESSAGE_TYPES = {
+    SUCCESS: 'success',
     ERR: 'err',
     WARNING: 'warning',
     INFO: 'info',
