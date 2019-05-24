@@ -41,10 +41,10 @@ class LoginContainer extends React.Component {
                 .then( ( user ) => {
                     setUser( user );
                 } )
-                .catch( () => {
+                .catch( ( err ) => {
                     this.setState( {
                         isLoading: false,
-                        message: 'Wrong password or username, please try again.',
+                        message: err.message,
                         messageType: MESSAGE_TYPES.ERR,
                     } );
                     return false;

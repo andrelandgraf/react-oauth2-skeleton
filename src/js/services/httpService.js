@@ -45,3 +45,5 @@ export const getRequest = endpoint => axios
         LoggingUtility.error( `Error in get request to entpoint ${ endpoint }`, err );
         throw Error( `${ err.response.data.code }:${ err.response.message }` );
     } );
+
+export const isNetworkError = err => !err.status && err.message === 'Network Error';

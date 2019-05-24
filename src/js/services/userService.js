@@ -2,7 +2,7 @@ import qs from 'qs';
 
 import Logger from '../utilities/Logger';
 import { GRANT_TYPES, getOAuthHeader, postAuthRequest } from './oAuthService';
-import { postRequest, getRequest } from './httpService';
+import { postRequest, getRequest, isNetworkError } from './httpService';
 
 const LoggingUtility = new Logger( 'userService.js' );
 
@@ -38,7 +38,10 @@ export const logUserIn = ( username, password ) => {
         } )
         .catch( ( err ) => {
             LoggingUtility.error( 'Error while logging in user', err );
-            throw Error( 'Unable to logIn, please check your username and password' );
+            if ( isNetworkError( err ) ) {
+                throw Error( 'Unable to connect to server - please check your internet connection.' );
+            }
+            throw Error( 'Unable to log-in - wrong password or username, please try again.' );
         } );
 };
 
@@ -52,7 +55,10 @@ export const registerUser = ( username, password ) => {
         .then( () => logUserIn( username, password ) )
         .catch( ( err ) => {
             LoggingUtility.error( 'Error while registering new user', err );
-            throw Error( 'Unable to register' );
+            if ( isNetworkError( err ) ) {
+                throw Error( 'Unable to connect to server - please check your internet connection.' );
+            }
+            throw Error( 'Unable to register - the username is already in use, please pick another username.' );
         } );
 };
 

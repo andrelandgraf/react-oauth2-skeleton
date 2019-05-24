@@ -23,7 +23,7 @@ For VSCode, we can recommend following extensions:
 
 ### `npm install``
 
-Install all third party dependencies. See `package.json` for more information.
+Install all third party dependencies with `npm install`. If the command throws errors, it might help to run it as sudo or with the unsafe flag: `sudo npm install --unsafe-perm=true`. See `package.json` for more information.
 
 ### setup .env
 
