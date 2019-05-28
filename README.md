@@ -21,7 +21,7 @@ For VSCode, we can recommend following extensions:
 
 - eslint: A package that will show you all eslint linting errors within your code. Make sure to activate the checkbox "Auto fix on save" to ensure that all auto linting fixes will be fixed on every file save
 
-### `npm install``
+### `npm install`
 
 Install all third party dependencies with `npm install`. If the command throws errors, it might help to run it as sudo or with the unsafe flag: `sudo npm install --unsafe-perm=true`. See `package.json` for more information.
 
@@ -30,6 +30,36 @@ Install all third party dependencies with `npm install`. If the command throws e
 Create a new file called `.env` and `.env.development` and copy the template from `EXAMPLE.env` and `EXAMPLE.env.development`. If you forked this repository, it is on you to invent secrets and save required secrets accordingly. If you are part of a team, than ask your co-contributors for the secrets and save them to your .env files. Please make sure that you keep the .env file private and do not share the information in the file with anyone. Do not add `.env` to git! 
 
 Important! We ejected out of create-react-app but we still use the create-react-app configs, e.g. see `./config && ./scripts`. Create-react-app does only allow custom env. variables that start with `REACT_APP_`. Please make sure that you name your custom env-variables accordingly. 
+
+### using git hook
+
+This part is optional but prevents you from accidently commiting unfinished code. Creade a new file named `commit-msg` to the folder `.git/hooks/` inside the root folder of this project and paste following code inside:
+
+```
+#!/bin/bash
+files=$(git diff --cached --name-only | grep '\.jsx\?$')
+
+# Prevent ESLint help message if no files matched
+if [[ $files = "" ]] ; then
+  exit 0
+fi
+
+failed=0
+for file in ${files}; do
+  git show :$file | ./node_modules/.bin/eslint $file
+  if [[ $? != 0 ]] ; then
+    failed=1
+  fi
+done;
+
+if [[ $failed != 0 ]] ; then
+  echo "🚫🚫🚫 ESLint failed, git commit denied!"
+  exit $failed
+fi
+```
+
+This prevents unfixed linting erros from being commited.
+IF the hook is not working, try: `chmod +x commit-msg`.
 
 ## Available Scripts
 
