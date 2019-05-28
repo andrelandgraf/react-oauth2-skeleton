@@ -4,10 +4,9 @@
 
 This repository provides a skeleton application that you can fork to quick-start your own React app!
 
-Find the corresponding backend-api express-oauth2-skeleton (here)[https://github.com/tum-aweink/express-oauth2-skeleton]. 
+Find the corresponding backend-api express-oauth2-skeleton [here](https://github.com/tum-aweink/express-oauth2-skeleton). 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-=> we ejected react app!
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) but we ejected Create React App to have more control over linting and configuration. Please find the Create React App documentation on the bottom of this README. 
 
 ## Getting started
 
@@ -17,7 +16,7 @@ This repository is set-up for unix systems only. Some scripts will not work on W
 
 Get yourself VSCode for a quick start. On Linux just run: `snap install code`. Other IDEs e.g. Webstorm work fine as well, just make sure that you have nice git and eslint support within your editor for more convenience.
 
-For VSCode, we can recommend following extensions:
+For VSCode, we can recommend the following extensions:
 
 - eslint: A package that will show you all eslint linting errors within your code. Make sure to activate the checkbox "Auto fix on save" to ensure that all auto linting fixes will be fixed on every file save
 
@@ -25,13 +24,13 @@ For VSCode, we can recommend following extensions:
 
 Install all third party dependencies with `npm install`. If the command throws errors, it might help to run it as sudo or with the unsafe flag: `sudo npm install --unsafe-perm=true`. See `package.json` for more information.
 
-### setup .env
+### Setup .env
 
 Create a new file called `.env` and `.env.development` and copy the template from `EXAMPLE.env` and `EXAMPLE.env.development`. If you forked this repository, it is on you to invent secrets and save required secrets accordingly. If you are part of a team, than ask your co-contributors for the secrets and save them to your .env files. Please make sure that you keep the .env file private and do not share the information in the file with anyone. Do not add `.env` to git! 
 
 Important! We ejected out of create-react-app but we still use the create-react-app configs, e.g. see `./config && ./scripts`. Create-react-app does only allow custom env. variables that start with `REACT_APP_`. Please make sure that you name your custom env-variables accordingly. 
 
-### using git hook
+### Using git hooks
 
 This part is optional but prevents you from accidently commiting unfinished code. Creade a new file named `commit-msg` to the folder `.git/hooks/` inside the root folder of this project and paste following code inside:
 
