@@ -6,6 +6,7 @@ import {
 import { UserStateContext } from '../../provider/UserStateProvider';
 
 import NavBar from '../../components/navbar/navbar';
+import PreferencesMenu from '../PreferencesMenu/PreferencesMenuContainer';
 import HomeView from '../../views/homeView';
 import ProfileView from '../../views/profileView';
 import LoginContainer from '../Login/LoginContainer';
@@ -13,9 +14,20 @@ import RegistrationContainer from '../Registration/RegistrationContainer';
 import OAuthContainer from '../OAuth/OAuthContainer';
 import Loader from '../../components/loading/loader';
 
+import UserLogo from '../../../img/user-logo.svg';
+
 import { isAuthenticated, getUser } from '../../services/userService';
 
 class App extends React.Component {
+    preferencesNavBarItem = {
+        key: 'preferences',
+        viewName: 'Preferences',
+        pictureSrc: UserLogo,
+        dropdown: true,
+        menu: PreferencesMenu,
+        float: 'right',
+    };
+
     componentWillMount = async () => {
         const { user, setUser } = this.context;
         // in case of page reload, we still hold token but need to get user again
@@ -35,9 +47,11 @@ class App extends React.Component {
             link: '/profile',
             float: 'left',
         },
+        this.preferencesNavBarItem,
     ];
 
     getNotAuthenticatedNavBarViews = () => [
+        this.preferencesNavBarItem,
         {
             key: 'register',
             viewName: 'Register',

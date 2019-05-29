@@ -1,23 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const NavBarItem = ( {
-    isCurrentView, viewName, link, float,
-} ) => (
-    <li className={float === 'right' ? 'item-right' : undefined}>
-        <a className={isCurrentView ? 'current-page' : undefined} href={link}>{viewName}</a>
-    </li>
-);
+import TextItem from './elements/textItem';
+import IconItem from './elements/iconItem';
+import LinkAction from './elements/linkAction';
+import DropDownAction from './elements/dropdownAction';
 
-NavBarItem.propTypes = {
-    isCurrentView: PropTypes.bool,
-    viewName: PropTypes.string.isRequired,
-    link: PropTypes.string.isRequired,
-    float: PropTypes.string.isRequired,
+const NavBarItem = ( { item } ) => {
+    if ( item.custom ) {
+        const { CustomComponent } = item.custom;
+        return ( <CustomComponent {...item} /> );
+    }
+
+    const ItemComponent = item.pictureSrc ? IconItem : TextItem;
+    const Action = item.dropdown ? DropDownAction : LinkAction;
+
+    return (
+        <li className={item.float === 'right' ? 'item-right' : undefined}>
+            <Action {...item}>
+                <ItemComponent {...item} />
+            </Action>
+        </li>
+    );
 };
 
-NavBarItem.defaultProps = {
-    isCurrentView: false,
+NavBarItem.propTypes = {
+    item: PropTypes.shape( {
+        key: PropTypes.string.isRequired,
+        viewName: PropTypes.string.isRequired,
+        link: PropTypes.string,
+        dropdown: PropTypes.bool,
+        Menu: PropTypes.node,
+        pictureSrc: PropTypes.string,
+        float: PropTypes.string.isRequired,
+        Custom: PropTypes.node,
+    } ).isRequired,
 };
 
 export default NavBarItem;

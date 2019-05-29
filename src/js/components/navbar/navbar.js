@@ -6,15 +6,10 @@ import NavBarItem from './navbarItem';
 
 const NavBar = ( { items } ) => (
     <ul className="navarbar">
-        { items.map( ( {
-            key, viewName, link, float,
-        } ) => (
+        { items.map( item => (
             <NavBarItem
-                key={key}
-                viewName={viewName}
-                link={link}
-                isCurrentView={window.location.pathname === link}
-                float={float}
+                key={item.key}
+                item={item}
             />
         ) )
         }
@@ -29,7 +24,10 @@ NavBar.propTypes = {
         PropTypes.shape( {
             key: PropTypes.string.isRequired,
             viewName: PropTypes.string.isRequired,
-            link: PropTypes.string.isRequired,
+            link: PropTypes.string,
+            dropdown: PropTypes.bool,
+            menu: PropTypes.node,
+            pictureSrc: PropTypes.string,
             float: PropTypes.string.isRequired,
         } ),
     ).isRequired,
