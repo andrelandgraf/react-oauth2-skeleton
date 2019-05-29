@@ -20,7 +20,7 @@
             text-align: center;
             text-decoration: none;
     
-            /* Change the link color to #111 (black) on hover */
+            /* Change the link color to black on hover */
             &:hover {
                 background-color: $black;
             }
@@ -30,35 +30,21 @@
                 cursor: default;
                 text-decoration: none;
                 background-color: $grey-base;
-                color: black;
+                color: $black;
             }
 
             .text-item {
                 padding: 14px 16px;
                 margin: 0;
             }
-    
-            .icon-item {
+        }
+
+        .icon-item {
+            height: 50px;
+            img {
                 padding: 10px 16px;
                 border-radius: 50%;
                 width: 28px;
-            }
-        }
-
-        &.logout-item {
-            float: right;
-
-            div {
-                display: block;
-                color: $white;
-                text-align: center;
-                padding: 14px 16px;
-                cursor: pointer;
-        
-                /* Change the link color to #111 (black) on hover */
-                &:hover {
-                    background-color: $black;
-                }
             }
         }
     }

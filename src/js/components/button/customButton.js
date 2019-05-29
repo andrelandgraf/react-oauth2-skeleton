@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 import { BUTTON_STYLES } from './button';
 
-const ImageButton = ( {
-    classes, id, onClick, src, alt,
+const CustomButton = ( {
+    id, classes, onClick, children,
 } ) => (
     <div
         className={`${ BUTTON_STYLES } ${ classes }`}
@@ -20,21 +20,23 @@ const ImageButton = ( {
             }
         }}
     >
-        <img alt={alt} src={src} />
+        { children }
     </div>
 );
 
-ImageButton.propTypes = {
+CustomButton.propTypes = {
     id: PropTypes.string.isRequired,
-    alt: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired,
     classes: PropTypes.string,
     onClick: PropTypes.func,
+    children: PropTypes.oneOfType( [
+        PropTypes.func,
+        PropTypes.node,
+    ] ).isRequired,
 };
 
-ImageButton.defaultProps = {
+CustomButton.defaultProps = {
     classes: '',
     onClick: undefined,
 };
 
-export default ImageButton;
+export default CustomButton;

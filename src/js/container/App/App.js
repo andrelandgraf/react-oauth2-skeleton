@@ -5,8 +5,7 @@ import {
 
 import { UserStateContext } from '../../provider/UserStateProvider';
 
-import NavBar from '../../components/navbar/navbar';
-import PreferencesMenu from '../PreferencesMenu/PreferencesMenuContainer';
+import NavBarContainer from '../NavBar/NavBarContainer';
 import HomeView from '../../views/homeView';
 import ProfileView from '../../views/profileView';
 import LoginContainer from '../Login/LoginContainer';
@@ -14,57 +13,14 @@ import RegistrationContainer from '../Registration/RegistrationContainer';
 import OAuthContainer from '../OAuth/OAuthContainer';
 import Loader from '../../components/loading/loader';
 
-import UserLogo from '../../../img/user-logo.svg';
-
 import { isAuthenticated, getUser } from '../../services/userService';
 
 class App extends React.Component {
-    preferencesNavBarItem = {
-        key: 'preferences',
-        viewName: 'Preferences',
-        pictureSrc: UserLogo,
-        dropdown: true,
-        menu: PreferencesMenu,
-        float: 'right',
-    };
-
     componentWillMount = async () => {
         const { user, setUser } = this.context;
         // in case of page reload, we still hold token but need to get user again
         if ( isAuthenticated() && !user ) this.getUser( setUser );
     }
-
-    getAuthenticatedNavBarViews = () => [
-        {
-            key: 'home',
-            viewName: 'Home',
-            link: '/',
-            float: 'left',
-        },
-        {
-            key: 'profile',
-            viewName: 'My Profile',
-            link: '/profile',
-            float: 'left',
-        },
-        this.preferencesNavBarItem,
-    ];
-
-    getNotAuthenticatedNavBarViews = () => [
-        this.preferencesNavBarItem,
-        {
-            key: 'register',
-            viewName: 'Register',
-            link: '/register',
-            float: 'right',
-        },
-        {
-            key: 'login',
-            viewName: 'Log-in',
-            link: '/login',
-            float: 'right',
-        },
-    ];
 
     scrollToTop = () => {
         window.scrollTo( 0, 0 );
@@ -108,9 +64,7 @@ class App extends React.Component {
 
     renderAuthenticatedApp = user => (
         <React.Fragment>
-            <NavBar
-                items={this.getAuthenticatedNavBarViews()}
-            />
+            <NavBarContainer loggedIn />
             {
                 user ? this.renderApp( user ) : this.renderAppLoading()
             }
@@ -119,9 +73,7 @@ class App extends React.Component {
 
     renderNotAuthenticatedApp = setUser => (
         <React.Fragment>
-            <NavBar
-                items={this.getNotAuthenticatedNavBarViews()}
-            />
+            <NavBarContainer loggedIn={false} />
             <Switch>
                 <Route
                     from="/login"

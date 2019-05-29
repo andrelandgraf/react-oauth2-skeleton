@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const BUTTON_STYLES = 'clickable button-center';
+export const BUTTON_STYLES = 'clickable button-center';
 
 const Button = ( { classes, text, onClick } ) => (
     <button
@@ -20,7 +20,7 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
-    classes: BUTTON_STYLES,
+    classes: '',
     text: 'click',
     onClick: undefined,
 };
