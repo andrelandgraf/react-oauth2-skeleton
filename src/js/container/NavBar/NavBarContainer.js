@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import NavBar from '../../components/navbar/navbar';
 import NavBarItem from '../../components/navbar/elements/navbarItem';
 import PreferenceItem from '../../components/navbar/elements/preferenceItem';
-import PreferencesMenu from '../../components/preferencesMenu/preferencesMenu';
+import PreferencesMenuContainer from '../PreferenceMenu/PreferenceMenuContainer';
 
 class NavBarContainer extends React.Component {
     constructor( props ) {
@@ -12,14 +12,17 @@ class NavBarContainer extends React.Component {
 
         this.state = {
             prefMenuOpen: false,
+            prefWillRerender: false,
         };
 
         window.addEventListener( 'click', this.onClickCloseMenu, false );
     }
 
     componentWillUnmount() {
-        window.removeEventListener( this.onClickCloseMenu );
+        window.removeEventListener( 'click', this.onClickCloseMenu );
     }
+
+    registerRerender = () => this.setState( { prefWillRerender: true } )
 
     onClickPreferenceItem = () => {
         this.setState( ( { prefMenuOpen } ) => ( { prefMenuOpen: !prefMenuOpen } ) );
@@ -33,11 +36,17 @@ class NavBarContainer extends React.Component {
         const menu = document.getElementsByClassName( 'preferences-menu' );
         const button = document.getElementById( 'preferences-navbar-button' );
         if ( !menu || !menu.length ) return;
+        // if rerender, items inside might change, allow one click without further checking
+        const { prefWillRerender } = this.state;
+        if ( prefWillRerender ) {
+            this.setState( { prefWillRerender: false } );
+            return;
+        }
+        // do not do anything if prefButton is clicked, as we have a dedicated func for that
         const targetIsPrefButton = event.target.id === 'preferences-navbar-button';
         const targetInPrefButton = button && button.contains( event.target );
-
         if ( targetIsPrefButton || targetInPrefButton ) return;
-
+        // do not close menu if user clicked inside
         const targetInMenu = menu[ 0 ].contains( event.target );
         const targetIsMenu = event.target === menu[ 0 ];
         const { prefMenuOpen } = this.state;
@@ -68,6 +77,12 @@ class NavBarContainer extends React.Component {
     ];
 
     renderNotAuthenticatedNavBarItems = () => [
+        <PreferenceItem
+            key="preferences"
+            label="Preferences"
+            float="right"
+            onClick={this.onClickPreferenceItem}
+        />,
         <NavBarItem
             key="register"
             label="Register"
@@ -94,7 +109,12 @@ class NavBarContainer extends React.Component {
                     }
                 </NavBar>
                 { prefMenuOpen
-                    ? <PreferencesMenu closeMenu={this.closePreferenceMenu} />
+                    ? (
+                        <PreferencesMenuContainer
+                            registerRerender={this.registerRerender}
+                            closeMenu={this.closePreferenceMenu}
+                        />
+                    )
                     : undefined
                 }
             </React.Fragment>

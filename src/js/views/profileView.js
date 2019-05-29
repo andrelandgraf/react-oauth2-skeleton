@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import i18n from 'i18next';
 
+import { KEYS } from '../utilities/internationalization/internationalization';
+
+// eslint-disable-next-line no-unused-vars
 const ProfileView = ( { user } ) => (
     <div className="container">
         <div className="center">
-            <h1>{`Welcome on your My Profile Page, ${ user.username }!`}</h1>
+            <h1>{ i18n.t( KEYS.PROFILE_TITLE ) }</h1>
         </div>
     </div>
 );

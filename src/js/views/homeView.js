@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import i18n from 'i18next';
+
+import { KEYS } from '../utilities/internationalization/internationalization';
 
 const HomeView = ( { user } ) => (
     <div className="container">
         <div className="center">
-            <h1>{`Hi, ${ user.username }! Welcome on your Home Page!`}</h1>
+            <h1>{ i18n.t( KEYS.HOME_WELCOME, { name: user.username } ) }</h1>
         </div>
     </div>
 );
