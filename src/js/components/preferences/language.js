@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import i18n from 'i18next';
+
+import { KEYS } from '../../utilities/internationalization/internationalization';
 
 import GlobeIcon from '../../../img/globe.svg';
 
@@ -11,7 +14,7 @@ const Language = ( { onClick } ) => (
         role="button"
         onClick={onClick}
     >
-        Language
+        {i18n.t( KEYS.LANGUAGE )}
         <img
             src={GlobeIcon}
             alt="Language Icon"

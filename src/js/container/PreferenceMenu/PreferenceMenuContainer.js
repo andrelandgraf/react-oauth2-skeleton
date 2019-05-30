@@ -1,5 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import i18n from 'i18next';
+
+import {
+    getLocale, setLocale, LOCALES, KEYS,
+} from '../../utilities/internationalization/internationalization';
+
 
 import CustomButton from '../../components/button/customButton';
 import Title from '../../components/preferences/title';
@@ -7,10 +13,8 @@ import Language from '../../components/preferences/language';
 import LogoutContainer from '../Logout/LogoutContainer';
 import Logout from '../../components/preferences/logout';
 
-import { getLocale, setLocale, LOCALES } from '../../utilities/internationalization/internationalization';
-
-const MAIN_MENU = 'Preferences';
-const LANG_MENU = 'Languages';
+const MAIN_MENU = i18n.t( KEYS.PREFERENCES );
+const LANG_MENU = i18n.t( KEYS.LANGUAGES );
 
 class PreferencesMenuContainer extends React.Component {
     constructor( props ) {
@@ -54,7 +58,6 @@ class PreferencesMenuContainer extends React.Component {
             <li className="item">
                 <Language
                     onClick={() => this.setTitle( LANG_MENU )}
-                    LanguageComponent={Language}
                 />
             </li>
             <li className="item">

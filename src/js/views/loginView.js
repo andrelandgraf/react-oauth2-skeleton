@@ -8,7 +8,7 @@ const LoginView = ( {
     onUsernameChange, onPasswordChange, onSubmit,
 } ) => (
     <div className="container login-container">
-        <h1>{`Hello World! Welcome to our ${ pageName } Page`}</h1>
+        <h1>{pageName}</h1>
         { Message }
         <LoginForm
             actionName={actionName}

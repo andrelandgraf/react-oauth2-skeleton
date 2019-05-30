@@ -1,7 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import i18n from 'i18next';
+
+import { KEYS } from '../../utilities/internationalization/internationalization';
 
 import LoginView from '../../views/loginView';
+import Loader from '../../components/loading/loader';
 import MessageComponent, { MESSAGE_TYPES } from '../../components/message/message';
 
 import { logUserIn } from '../../services/userService';
@@ -65,7 +69,7 @@ class LoginContainer extends React.Component {
     )
 
     renderLoader = () => (
-        <div>Loading...</div>
+        <Loader />
     );
 
     renderLoginForm = ( username, password, pageName, actionName, Message ) => (
@@ -101,8 +105,8 @@ LoginContainer.propTypes = {
 };
 
 LoginContainer.defaultProps = {
-    pageName: 'Login',
-    actionName: 'login',
+    pageName: i18n.t( KEYS.LOGIN ),
+    actionName: i18n.t( KEYS.LOGIN ),
     onSubmit: undefined,
     setUser: undefined,
 };

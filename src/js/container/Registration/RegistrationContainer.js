@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import i18n from 'i18next';
+
+import { KEYS } from '../../utilities/internationalization/internationalization';
 
 import { registerUser } from '../../services/userService';
 
@@ -24,8 +27,8 @@ class RegistrationContainer extends React.Component {
     render() {
         return (
             <LoginContainer
-                pageName="Registration"
-                actionName="register"
+                pageName={i18n.t( KEYS.REGISTRATION )}
+                actionName={i18n.t( KEYS.REGISTER )}
                 onSubmit={this.handleSubmit}
             />
         );

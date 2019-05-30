@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import i18n from 'i18next';
+
+import { KEYS } from '../../utilities/internationalization/internationalization';
 
 const LoginForm = ( {
     username, password, onUsernameChange, onPasswordChange, onSubmit, actionName,
@@ -7,20 +10,20 @@ const LoginForm = ( {
     <form className="login-form" onSubmit={onSubmit}>
         <input
             type="text"
-            placeholder="your username"
+            placeholder={i18n.t( KEYS.USERNAME )}
             value={username}
             onChange={onUsernameChange}
             pattern=".{3,}"
-            title="Username must be longer than 2 characters!"
+            title={i18n.t( KEYS.USERNAME_WARNING )}
             required
         />
         <input
             type="password"
-            placeholder="your password"
+            placeholder={i18n.t( KEYS.PASSWORD )}
             value={password}
             onChange={onPasswordChange}
             pattern=".{1,}"
-            title="Password must be set!"
+            title={i18n.t( KEYS.PASSWORD_WARNING )}
             required
         />
         <input type="submit" value={actionName} className="clickable" />

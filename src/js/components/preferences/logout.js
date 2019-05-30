@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import i18n from 'i18next';
+
+import { KEYS } from '../../utilities/internationalization/internationalization';
+import { logUserOut } from '../../services/userService';
 
 import LogoutIcon from '../../../img/logout.svg';
 
-import { logUserOut } from '../../services/userService';
-
 import CustomButton from '../button/customButton';
+
 
 const Logout = ( { setUser, loggedIn, onWillLogout } ) => (
     <CustomButton
@@ -20,7 +23,7 @@ const Logout = ( { setUser, loggedIn, onWillLogout } ) => (
             setUser( undefined );
         }}
     >
-        Log out
+        {i18n.t( KEYS.LOGOUT )}
         <img
             src={LogoutIcon}
             alt="Logout Icon"

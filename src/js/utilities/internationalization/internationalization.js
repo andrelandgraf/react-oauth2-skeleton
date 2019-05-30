@@ -9,11 +9,32 @@ export const LOCALES = {
 
 export const KEYS = {
     APP_NAME: 'APP_NAME',
+    HOME: 'HOME',
+    MY_PROFILE: 'MY_PROFILE',
     HOME_WELCOME: 'HOME_WELCOME',
     PROFILE_TITLE: 'PROFILE_TITLE',
+    USERNAME: 'USERNAME',
+    USERNAME_WARNING: 'USERNAME_WARNING',
+    PASSWORD: 'PASSWORD',
+    PASSWORD_WARNING: 'PASSWORD_WARNING',
+    PREFERENCES: 'PREFERENCES',
+    LANGUAGES: 'LANGUAGES',
+    LANGUAGE: 'LANGUAGE',
+    REGISTRATION: 'REGISTRATION',
+    REGISTER: 'REGISTER',
+    LOGIN: 'LOGIN',
+    LOGOUT: 'LOGOUT',
 };
 
-export const DEFAULT_LOCALE = LOCALES.ENGLISH_LOCALE;
+function getBrowserLang() {
+    let lang = navigator.languages ? navigator.languages[ 0 ] : navigator.language;
+    if ( lang.length > 2 ) { lang = lang.slice( 3 ); }
+    return lang.toLowerCase();
+}
+
+const browserLang = getBrowserLang();
+const isValid = Object.keys( LOCALES ).find( LOCALE => LOCALES[ LOCALE ] === browserLang );
+export const DEFAULT_LOCALE = isValid ? browserLang : LOCALES.ENGLISH_LOCALE;
 
 export const getLocale = () => {
     const { locale } = window.localStorage;

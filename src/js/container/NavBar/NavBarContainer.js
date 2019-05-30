@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import i18n from 'i18next';
+
+import { KEYS } from '../../utilities/internationalization/internationalization';
 
 import NavBar from '../../components/navbar/navbar';
 import NavBarItem from '../../components/navbar/elements/navbarItem';
@@ -58,19 +61,19 @@ class NavBarContainer extends React.Component {
     renderAuthenticatedNavBarItems = () => [
         <NavBarItem
             key="home"
-            label="Home"
+            label={i18n.t( KEYS.HOME )}
             link="/"
             float="left"
         />,
         <NavBarItem
             key="profile"
-            label="My Profile"
+            label={i18n.t( KEYS.MY_PROFILE )}
             link="/profile"
             float="left"
         />,
         <PreferenceItem
             key="preferences"
-            label="Preferences"
+            label={i18n.t( KEYS.PREFERENCES )}
             float="right"
             onClick={this.onClickPreferenceItem}
         />,
@@ -79,19 +82,19 @@ class NavBarContainer extends React.Component {
     renderNotAuthenticatedNavBarItems = () => [
         <PreferenceItem
             key="preferences"
-            label="Preferences"
+            label={i18n.t( KEYS.PREFERENCES )}
             float="right"
             onClick={this.onClickPreferenceItem}
         />,
         <NavBarItem
             key="register"
-            label="Register"
+            label={i18n.t( KEYS.REGISTER )}
             link="/register"
             float="right"
         />,
         <NavBarItem
             key="login"
-            label="Log-in"
+            label={i18n.t( KEYS.LOGIN )}
             link="/login"
             float="right"
         />,
