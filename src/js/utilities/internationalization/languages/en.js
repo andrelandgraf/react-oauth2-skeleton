@@ -17,6 +17,13 @@ const enData = {
         REGISTER: 'Register',
         LOGIN: 'Login',
         LOGOUT: 'Logout',
+        ERROR: 'Error',
+        WARNING: 'Warning',
+        SUCCESS: 'Success',
+        INFO: 'Info',
+        WRONG_CREDENTIALS_ERR: '$t(ERROR), wrong $t(USERNAME) or password, please try again.',
+        NOT_AUTHORIZED_ERR: '$t(ERROR), you are not authorized to access this page.',
+        SERVER_NOT_REACHABLE_ERR: '$t(ERROR), unable to connect to server - please check your internet connection.',
     },
 };
 

@@ -1,8 +1,9 @@
 import qs from 'qs';
 
 import Logger from '../utilities/Logger';
+import { throwWrongCredentialsError, throwUsernameAlreadyTaken } from '../utilities/err';
 import { GRANT_TYPES, getOAuthHeader, postAuthRequest } from './oAuthService';
-import { postRequest, getRequest, isNetworkError } from './httpService';
+import { postRequest, getRequest } from './httpService';
 
 const LoggingUtility = new Logger( 'userService.js' );
 
@@ -38,10 +39,7 @@ export const logUserIn = ( username, password ) => {
         } )
         .catch( ( err ) => {
             LoggingUtility.error( 'Error while logging in user', err );
-            if ( isNetworkError( err ) ) {
-                throw Error( 'Unable to connect to server - please check your internet connection.' );
-            }
-            throw Error( 'Unable to log-in - wrong password or username, please try again.' );
+            throwWrongCredentialsError();
         } );
 };
 
@@ -55,10 +53,7 @@ export const registerUser = ( username, password ) => {
         .then( () => logUserIn( username, password ) )
         .catch( ( err ) => {
             LoggingUtility.error( 'Error while registering new user', err );
-            if ( isNetworkError( err ) ) {
-                throw Error( 'Unable to connect to server - please check your internet connection.' );
-            }
-            throw Error( 'Unable to register - the username is already in use, please pick another username.' );
+            throwUsernameAlreadyTaken();
         } );
 };
 
@@ -78,9 +73,8 @@ export const oAuthUser = ( username, password, state, clientId, redirectUri ) =>
     const header = getOAuthHeader( clientId, clientSecret );
     // after this backend call, the page will redirect automatically to aws/amazon
     return postAuthRequest( '', qs.stringify( data ), header )
-        .catch( ( err ) => {
-            LoggingUtility.error( 'Error while authenticating user via oAuth', err );
-            throw Error( 'Unable to logIn, please check your username and password' );
+        .catch( () => {
+            throwWrongCredentialsError();
         } );
 };
 
