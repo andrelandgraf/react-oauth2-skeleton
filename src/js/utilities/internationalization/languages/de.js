@@ -21,6 +21,8 @@ const deData = {
         WARNING: 'Warnung',
         SUCCESS: 'Erfolg',
         INFO: 'Info',
+        PAGE_NOT_FOUND: 'Seite nicht gefunden!',
+        PAGE_NOT_FOUND_MESSAGE: 'Es tut uns Leid, die gesuchte Seite existiert nicht.',
         WRONG_CREDENTIALS_ERR: '$t(ERROR), falscher $t(USERNAME) or falsches Passwort, bitte versuche es erneut.',
         NOT_AUTHORIZED_ERR: '$t(ERROR), du bist nicht authorisiert diesen Bereich zu betreten.',
         SERVER_NOT_REACHABLE_ERR: '$t(ERROR), der Server ist nicht erreichbar, bitte überprüfe deine Internetverbindung.',

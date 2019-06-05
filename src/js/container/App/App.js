@@ -8,6 +8,7 @@ import { UserStateContext } from '../../provider/UserStateProvider';
 import NavBarContainer from '../NavBar/NavBarContainer';
 import HomeView from '../../views/homeView';
 import ProfileView from '../../views/profileView';
+import NotFoundView from '../../views/notFoundView';
 import LoginContainer from '../Login/LoginContainer';
 import RegistrationContainer from '../Registration/RegistrationContainer';
 import OAuthContainer from '../OAuth/OAuthContainer';
@@ -45,20 +46,17 @@ class App extends React.Component {
             <Route
                 exact
                 path="/"
-                render={props => (
-                    <HomeView {...props} user={user} />
-                )}
+                render={props => ( <HomeView {...props} user={user} /> )}
             />
             <Route
                 exact
                 path="/profile"
-                render={props => (
-                    <ProfileView {...props} user={user} />
-                )}
+                render={props => ( <ProfileView {...props} user={user} /> )}
             />
             <Route from="/oauth/v2/login" component={OAuthContainer} />
             <Redirect from="/login" to={window.localStorage.getItem( 'redirectUrl' )} />
             <Redirect from="/register" to={window.localStorage.getItem( 'redirectUrl' )} />
+            <Route from="*" component={NotFoundView} />
         </Switch>
     );
 
