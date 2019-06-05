@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import Logger from '../utilities/Logger';
 import { isDevelopment } from '../utilities/env';
-import { throwServerNotReachableError } from '../utilities/err';
+import { throwServerNotReachableError } from '../utilities/errorHandler/errorHandler';
 import { refreshAuthToken } from './oAuthService';
 import { getStoredAuthToken } from './userService';
 

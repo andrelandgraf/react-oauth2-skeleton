@@ -1,0 +1,34 @@
+import i18n from 'i18next';
+
+import { KEYS } from '../internationalization/internationalization';
+import {
+    ServerNotReachableError,
+    NotAuthorizedError,
+    WrongCredentialsError,
+    UsernameAlreadyTakenError,
+} from './Error';
+
+/*
+ * Error Messages should be consistent accorss an application
+ */
+export const throwServerNotReachableError = () => {
+    const msg = i18n.t( KEYS.SERVER_NOT_REACHABLE_ERR );
+    throw new ServerNotReachableError( msg );
+};
+
+export const throwNotAuthorizedError = () => {
+    const msg = i18n.t( KEYS.NOT_AUTHORIZED_ERR );
+    throw new NotAuthorizedError( msg );
+};
+
+export const throwWrongCredentialsError = () => {
+    const msg = i18n.t( KEYS.WRONG_CREDENTIALS_ERR );
+    throw new WrongCredentialsError( msg );
+};
+
+export const throwUsernameAlreadyTaken = () => {
+    const msg = i18n.t( KEYS.USERNAME_ALREADY_TAKEN_ERR );
+    throw new UsernameAlreadyTakenError( msg );
+};
+
+export const isCustomError = err => err.isCustomError;

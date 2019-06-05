@@ -23,7 +23,8 @@ const enData = {
         INFO: 'Info',
         WRONG_CREDENTIALS_ERR: '$t(ERROR), wrong $t(USERNAME) or password, please try again.',
         NOT_AUTHORIZED_ERR: '$t(ERROR), you are not authorized to access this page.',
-        SERVER_NOT_REACHABLE_ERR: '$t(ERROR), unable to connect to server - please check your internet connection.',
+        SERVER_NOT_REACHABLE_ERR: '$t(ERROR), unable to connect to server, please check your internet connection.',
+        USERNAME_ALREADY_TAKEN_ERR: '$t(ERROR), the username is already in use, please pick another one.',
     },
 };
 

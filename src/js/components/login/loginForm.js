@@ -4,8 +4,10 @@ import i18n from 'i18next';
 
 import { KEYS } from '../../utilities/internationalization/internationalization';
 
+import SubmitButton from '../button/submitButton';
+
 const LoginForm = ( {
-    username, password, onUsernameChange, onPasswordChange, onSubmit, actionName,
+    username, password, onUsernameChange, onPasswordChange, onSubmit, actionName, isLoading,
 } ) => (
     <form className="login-form" onSubmit={onSubmit}>
         <input
@@ -26,7 +28,7 @@ const LoginForm = ( {
             title={i18n.t( KEYS.PASSWORD_WARNING )}
             required
         />
-        <input type="submit" value={actionName} className="clickable" />
+        <SubmitButton label={actionName} isLoading={isLoading} />
     </form>
 );
 
@@ -37,6 +39,7 @@ LoginForm.propTypes = {
     onUsernameChange: PropTypes.func.isRequired,
     onPasswordChange: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool.isRequired,
 };
 
 export default LoginForm;

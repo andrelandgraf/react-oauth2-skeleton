@@ -1,7 +1,7 @@
 import qs from 'qs';
 
 import Logger from '../utilities/Logger';
-import { throwWrongCredentialsError, throwUsernameAlreadyTaken } from '../utilities/err';
+import { throwWrongCredentialsError, throwUsernameAlreadyTaken, isCustomError } from '../utilities/errorHandler/errorHandler';
 import { GRANT_TYPES, getOAuthHeader, postAuthRequest } from './oAuthService';
 import { postRequest, getRequest } from './httpService';
 
@@ -38,6 +38,9 @@ export const logUserIn = ( username, password ) => {
             return res.data.user;
         } )
         .catch( ( err ) => {
+            if ( isCustomError( err ) ) {
+                throw err;
+            }
             LoggingUtility.error( 'Error while logging in user', err );
             throwWrongCredentialsError();
         } );
@@ -52,6 +55,9 @@ export const registerUser = ( username, password ) => {
         // will return user object to initial caller of registerUser
         .then( () => logUserIn( username, password ) )
         .catch( ( err ) => {
+            if ( isCustomError( err ) ) {
+                throw err;
+            }
             LoggingUtility.error( 'Error while registering new user', err );
             throwUsernameAlreadyTaken();
         } );
@@ -73,7 +79,10 @@ export const oAuthUser = ( username, password, state, clientId, redirectUri ) =>
     const header = getOAuthHeader( clientId, clientSecret );
     // after this backend call, the page will redirect automatically to aws/amazon
     return postAuthRequest( '', qs.stringify( data ), header )
-        .catch( () => {
+        .catch( ( err ) => {
+            if ( isCustomError( err ) ) {
+                throw err;
+            }
             throwWrongCredentialsError();
         } );
 };

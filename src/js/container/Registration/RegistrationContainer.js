@@ -15,11 +15,6 @@ class RegistrationContainer extends React.Component {
         await registerUser( username, password )
             .then( ( user ) => {
                 setUser( user );
-            } )
-            .catch( () => {
-                // eslint-disable-next-line no-alert
-                alert( 'err while trying to register, pls try again' );
-                return false;
             } );
         return true;
     }

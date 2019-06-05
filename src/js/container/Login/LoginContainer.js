@@ -5,7 +5,6 @@ import i18n from 'i18next';
 import { KEYS } from '../../utilities/internationalization/internationalization';
 
 import LoginView from '../../views/loginView';
-import Loader from '../../components/loading/loader';
 import MessageComponent, { MESSAGE_TYPES } from '../../components/message/message';
 
 import { logUserIn } from '../../services/userService';
@@ -13,6 +12,7 @@ import { logUserIn } from '../../services/userService';
 class LoginContainer extends React.Component {
     constructor( props ) {
         super( props );
+
         this.state = {
             username: '',
             password: '',
@@ -37,27 +37,28 @@ class LoginContainer extends React.Component {
         if ( username.length < 2 || password === '' ) {
             return false;
         }
-
-        // default behavior (normal login page)
+        this.setState( { isLoading: true } );
         if ( !onSubmit ) {
-            this.setState( { isLoading: true } );
-            await logUserIn( username, password )
+            // default behavior (normal login page)
+            return logUserIn( username, password )
                 .then( ( user ) => {
                     setUser( user );
+                    return true;
                 } )
-                .catch( ( err ) => {
-                    this.setState( {
-                        isLoading: false,
-                        message: err.message,
-                        messageType: MESSAGE_TYPES.ERR,
-                    } );
-                    return false;
-                } );
-        } else {
-            // oAuth or other extensive behavior
-            return onSubmit( username, password );
+                .catch( err => this.handleError( err ) );
         }
-        return true;
+        // register, oAuth or other extensive behavior
+        return onSubmit( username, password )
+            .catch( err => this.handleError( err ) );
+    }
+
+    handleError = ( err ) => {
+        this.setState( {
+            isLoading: false,
+            message: err.message,
+            messageType: MESSAGE_TYPES.ERR,
+        } );
+        return false;
     }
 
     clearMessage = () => {
@@ -68,11 +69,7 @@ class LoginContainer extends React.Component {
         <MessageComponent type={messageType} text={message} onResolve={this.clearMessage} />
     )
 
-    renderLoader = () => (
-        <Loader />
-    );
-
-    renderLoginForm = ( username, password, pageName, actionName, Message ) => (
+    renderLoginForm = ( username, password, pageName, actionName, Message, isLoading ) => (
         <LoginView
             pageName={pageName}
             actionName={actionName}
@@ -82,6 +79,7 @@ class LoginContainer extends React.Component {
             onUsernameChange={this.handleUsernameChange}
             onPasswordChange={this.handlePasswordChange}
             onSubmit={this.handleSubmit}
+            isLoading={isLoading}
         />
     );
 
@@ -92,8 +90,7 @@ class LoginContainer extends React.Component {
         let Message;
         if ( message ) { Message = this.renderMessage( message, messageType ); }
         const { pageName, actionName } = this.props;
-        if ( isLoading ) return this.renderLoader();
-        return this.renderLoginForm( username, password, pageName, actionName, Message );
+        return this.renderLoginForm( username, password, pageName, actionName, Message, isLoading );
     }
 }
 

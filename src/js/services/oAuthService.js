@@ -1,7 +1,8 @@
 import axios from 'axios';
 
-import { API } from './httpService';
+import { API, isNetworkError } from './httpService';
 import { getStoredRefreshToken } from './userService';
+import { throwServerNotReachableError } from '../utilities/errorHandler/errorHandler';
 
 const AUTH_ENDPOINT = 'auth/token';
 
@@ -25,7 +26,8 @@ export const getOAuthHeader = ( clientID, clientSecret ) => {
 
 // the actual post request to the oauth url
 export const postAuthRequest = ( params, data, headers ) => axios
-    .post( API + AUTH_ENDPOINT + params, data, { headers } );
+    .post( API + AUTH_ENDPOINT + params, data, { headers } )
+    .catch( err => isNetworkError( err ) && throwServerNotReachableError() );
 
 // refresh authToken
 export const refreshAuthToken = ( resolve ) => {
@@ -36,5 +38,7 @@ export const refreshAuthToken = ( resolve ) => {
         grant_type: GRANT_TYPES.REFRESH_TOKEN,
         refresh_token: refreshToken,
     };
-    postAuthRequest( params, data, headers ).then( () => resolve() );
+    postAuthRequest( params, data, headers )
+        .then( () => resolve() )
+        .catch( err => isNetworkError( err ) && throwServerNotReachableError() );
 };

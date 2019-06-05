@@ -5,7 +5,7 @@ import LoginForm from '../components/login/loginForm';
 
 const LoginView = ( {
     username, password, pageName, actionName, Message,
-    onUsernameChange, onPasswordChange, onSubmit,
+    onUsernameChange, onPasswordChange, onSubmit, isLoading,
 } ) => (
     <div className="container login-container">
         <h1>{pageName}</h1>
@@ -17,6 +17,7 @@ const LoginView = ( {
             onUsernameChange={onUsernameChange}
             onPasswordChange={onPasswordChange}
             onSubmit={onSubmit}
+            isLoading={isLoading}
         />
     </div>
 );
@@ -30,6 +31,7 @@ LoginView.propTypes = {
     onUsernameChange: PropTypes.func.isRequired,
     onPasswordChange: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool.isRequired,
 };
 
 LoginView.defaultProps = {
