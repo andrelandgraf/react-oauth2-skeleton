@@ -13,8 +13,8 @@ import Language from '../../components/preferences/language';
 import LogoutContainer from '../Logout/LogoutContainer';
 import Logout from '../../components/preferences/logout';
 
-const MAIN_MENU = i18n.t( KEYS.PREFERENCES );
-const LANG_MENU = i18n.t( KEYS.LANGUAGES );
+const MAIN_MENU = i18n.t( KEYS.LABELS.PREFERENCES );
+const LANG_MENU = i18n.t( KEYS.LABELS.LANGUAGES );
 
 class PreferencesMenuContainer extends React.Component {
     constructor( props ) {

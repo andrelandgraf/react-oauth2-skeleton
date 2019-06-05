@@ -14,7 +14,7 @@ const Language = ( { onClick } ) => (
         role="button"
         onClick={onClick}
     >
-        {i18n.t( KEYS.LANGUAGE )}
+        {i18n.t( KEYS.LABELS.LANGUAGE )}
         <img
             src={GlobeIcon}
             alt="Language Icon"

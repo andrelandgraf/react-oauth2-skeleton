@@ -8,7 +8,7 @@ import { KEYS } from '../utilities/internationalization/internationalization';
 const ProfileView = ( { user } ) => (
     <div className="container">
         <div className="center">
-            <h1>{ i18n.t( KEYS.PROFILE_TITLE ) }</h1>
+            <h1>{ i18n.t( KEYS.HEADERS.PROFILE_TITLE ) }</h1>
         </div>
     </div>
 );

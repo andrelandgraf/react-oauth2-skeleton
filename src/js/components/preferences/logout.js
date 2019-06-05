@@ -23,7 +23,7 @@ const Logout = ( { setUser, loggedIn, onWillLogout } ) => (
             setUser( undefined );
         }}
     >
-        {i18n.t( KEYS.LOGOUT )}
+        {i18n.t( KEYS.LABELS.LOGOUT )}
         <img
             src={LogoutIcon}
             alt="Logout Icon"

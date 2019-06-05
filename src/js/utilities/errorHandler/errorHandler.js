@@ -12,22 +12,22 @@ import {
  * Error Messages should be consistent accorss an application
  */
 export const throwServerNotReachableError = () => {
-    const msg = i18n.t( KEYS.SERVER_NOT_REACHABLE_ERR );
+    const msg = i18n.t( KEYS.MESSAGES.SERVER_NOT_REACHABLE_ERR );
     throw new ServerNotReachableError( msg );
 };
 
 export const throwNotAuthorizedError = () => {
-    const msg = i18n.t( KEYS.NOT_AUTHORIZED_ERR );
+    const msg = i18n.t( KEYS.MESSAGES.NOT_AUTHORIZED_ERR );
     throw new NotAuthorizedError( msg );
 };
 
 export const throwWrongCredentialsError = () => {
-    const msg = i18n.t( KEYS.WRONG_CREDENTIALS_ERR );
+    const msg = i18n.t( KEYS.MESSAGES.WRONG_CREDENTIALS_ERR );
     throw new WrongCredentialsError( msg );
 };
 
 export const throwUsernameAlreadyTaken = () => {
-    const msg = i18n.t( KEYS.USERNAME_ALREADY_TAKEN_ERR );
+    const msg = i18n.t( KEYS.MESSAGES.USERNAME_ALREADY_TAKEN_ERR );
     throw new UsernameAlreadyTakenError( msg );
 };
 

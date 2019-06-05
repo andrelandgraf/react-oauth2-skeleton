@@ -22,8 +22,8 @@ class RegistrationContainer extends React.Component {
     render() {
         return (
             <LoginContainer
-                pageName={i18n.t( KEYS.REGISTRATION )}
-                actionName={i18n.t( KEYS.REGISTER )}
+                pageName={i18n.t( KEYS.LABELS.REGISTRATION )}
+                actionName={i18n.t( KEYS.LABELS.REGISTER )}
                 onSubmit={this.handleSubmit}
             />
         );

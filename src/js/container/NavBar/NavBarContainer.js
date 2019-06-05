@@ -61,19 +61,19 @@ class NavBarContainer extends React.Component {
     renderAuthenticatedNavBarItems = () => [
         <NavBarItem
             key="home"
-            label={i18n.t( KEYS.HOME )}
+            label={i18n.t( KEYS.LABELS.HOME )}
             link="/"
             float="left"
         />,
         <NavBarItem
             key="profile"
-            label={i18n.t( KEYS.MY_PROFILE )}
+            label={i18n.t( KEYS.LABELS.MY_PROFILE )}
             link="/profile"
             float="left"
         />,
         <PreferenceItem
             key="preferences"
-            label={i18n.t( KEYS.PREFERENCES )}
+            label={i18n.t( KEYS.LABELS.PREFERENCES )}
             float="right"
             onClick={this.onClickPreferenceItem}
         />,
@@ -82,19 +82,19 @@ class NavBarContainer extends React.Component {
     renderNotAuthenticatedNavBarItems = () => [
         <PreferenceItem
             key="preferences"
-            label={i18n.t( KEYS.PREFERENCES )}
+            label={i18n.t( KEYS.LABELS.PREFERENCES )}
             float="right"
             onClick={this.onClickPreferenceItem}
         />,
         <NavBarItem
             key="register"
-            label={i18n.t( KEYS.REGISTER )}
+            label={i18n.t( KEYS.LABELS.REGISTER )}
             link="/register"
             float="right"
         />,
         <NavBarItem
             key="login"
-            label={i18n.t( KEYS.LOGIN )}
+            label={i18n.t( KEYS.LABELS.LOGIN )}
             link="/login"
             float="right"
         />,

@@ -7,7 +7,7 @@ import { KEYS } from '../utilities/internationalization/internationalization';
 const HomeView = ( { user } ) => (
     <div className="container">
         <div className="center">
-            <h1>{ i18n.t( KEYS.HOME_WELCOME, { name: user.username } ) }</h1>
+            <h1>{ i18n.t( KEYS.HEADERS.HOME_WELCOME, { name: user.username } ) }</h1>
         </div>
     </div>
 );

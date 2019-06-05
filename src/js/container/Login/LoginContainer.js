@@ -102,8 +102,8 @@ LoginContainer.propTypes = {
 };
 
 LoginContainer.defaultProps = {
-    pageName: i18n.t( KEYS.LOGIN ),
-    actionName: i18n.t( KEYS.LOGIN ),
+    pageName: i18n.t( KEYS.LABELS.LOGIN ),
+    actionName: i18n.t( KEYS.LABELS.LOGIN ),
     onSubmit: undefined,
     setUser: undefined,
 };

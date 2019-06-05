@@ -12,20 +12,20 @@ const LoginForm = ( {
     <form className="login-form" onSubmit={onSubmit}>
         <input
             type="text"
-            placeholder={i18n.t( KEYS.USERNAME )}
+            placeholder={i18n.t( KEYS.LABELS.USERNAME )}
             value={username}
             onChange={onUsernameChange}
             pattern=".{3,}"
-            title={i18n.t( KEYS.USERNAME_WARNING )}
+            title={i18n.t( KEYS.MESSAGES.USERNAME_WARNING )}
             required
         />
         <input
             type="password"
-            placeholder={i18n.t( KEYS.PASSWORD )}
+            placeholder={i18n.t( KEYS.LABELS.PASSWORD )}
             value={password}
             onChange={onPasswordChange}
             pattern=".{1,}"
-            title={i18n.t( KEYS.PASSWORD_WARNING )}
+            title={i18n.t( KEYS.MESSAGES.PASSWORD_WARNING )}
             required
         />
         <SubmitButton label={actionName} isLoading={isLoading} />
