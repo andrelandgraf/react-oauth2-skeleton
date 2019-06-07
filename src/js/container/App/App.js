@@ -16,6 +16,18 @@ import Loader from '../../components/loading/loader';
 
 import { isAuthenticated, getUser } from '../../services/userService';
 
+const AUTH_ROUTES = {
+    HOME: '/',
+    PROFILE: '/profile',
+    OAUTH: '/oauth/v2/login',
+};
+
+const NONAUTH_ROUTES = {
+    LOGIN: '/login',
+    REGISTER: '/register',
+    OAUTH: '/oauth/v2/login',
+};
+
 class App extends React.Component {
     componentWillMount = async () => {
         const { user, setUser } = this.context;
@@ -45,17 +57,17 @@ class App extends React.Component {
         <Switch>
             <Route
                 exact
-                path="/"
+                path={AUTH_ROUTES.HOME}
                 render={props => ( <HomeView {...props} user={user} /> )}
             />
             <Route
                 exact
-                path="/profile"
+                path={AUTH_ROUTES.PROFILE}
                 render={props => ( <ProfileView {...props} user={user} /> )}
             />
-            <Route from="/oauth/v2/login" component={OAuthContainer} />
-            <Redirect from="/login" to={window.localStorage.getItem( 'redirectUrl' )} />
-            <Redirect from="/register" to={window.localStorage.getItem( 'redirectUrl' )} />
+            <Route from={AUTH_ROUTES.OAUTH} component={OAuthContainer} />
+            <Redirect from={NONAUTH_ROUTES.LOGIN} to={window.localStorage.getItem( 'redirectUrl' )} />
+            <Redirect from={NONAUTH_ROUTES.REGISTER} to={window.localStorage.getItem( 'redirectUrl' )} />
             <Route from="*" component={NotFoundView} />
         </Switch>
     );
@@ -74,19 +86,19 @@ class App extends React.Component {
             <NavBarContainer loggedIn={false} />
             <Switch>
                 <Route
-                    from="/login"
+                    from={NONAUTH_ROUTES.LOGIN}
                     render={props => (
                         <LoginContainer {...props} setUser={setUser} />
                     )}
                 />
                 <Route
-                    from="/register"
+                    from={NONAUTH_ROUTES.REGISTER}
                     render={props => (
                         <RegistrationContainer {...props} setUser={setUser} />
                     )}
                 />
-                <Route from="/oauth/v2/login" component={OAuthContainer} />
-                <Redirect path="*" to="/login" />
+                <Route from={NONAUTH_ROUTES.OAUTH} component={OAuthContainer} />
+                <Redirect path="*" to={NONAUTH_ROUTES.LOGIN} />
             </Switch>
         </React.Fragment>
     )
@@ -96,7 +108,11 @@ class App extends React.Component {
 
         if ( !isAuthenticated() ) {
             let redirectUrl = window.location.pathname;
-            if ( redirectUrl === '/login' || redirectUrl === '/register' ) redirectUrl = '/';
+            const isValid = Object.keys( AUTH_ROUTES )
+                .find( key => AUTH_ROUTES[ key ].startsWith( redirectUrl ) );
+            if ( !isValid ) {
+                redirectUrl = '/';
+            }
             window.localStorage.setItem( 'redirectUrl', redirectUrl );
         }
         return (

@@ -4,9 +4,8 @@
     top: 50px;
     right: 0;
     z-index: 1;
-    // make it scrollable
-    overflow: scroll;
     max-height: 50vh;
+    overflow-y: auto;
     // style it as a menu
     list-style-type: none;
     margin-top: 3px;
