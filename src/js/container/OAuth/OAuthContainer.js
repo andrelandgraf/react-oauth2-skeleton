@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { oAuthUser } from '../../services/userService';
+import { throwRequestParameterMissingError } from '../../utilities/errorHandler/errorHandler';
 
 import LoginContainer from '../Login/LoginContainer';
 
@@ -14,16 +15,13 @@ class OAuthContainer extends React.Component {
         const clientId = urlParams.get( 'client_id' );
         const state = urlParams.get( 'state' );
         const redirectUri = urlParams.get( 'redirect_uri' );
-        if ( !clientId ) {
-            // eslint-disable-next-line no-alert
-            alert( 'bad query string, check query params' );
-            return false;
+        if ( !clientId || !state || !redirectUri ) {
+            throwRequestParameterMissingError();
         }
-        console.log( 'state', state );
-        console.log( 'redirect url', redirectUri );
         oAuthUser( username, password, clientId )
             .then( ( user ) => {
-                window.location = `${ redirectUri }?code=${ user.username }`;
+                // Simulate an HTTP redirect
+                window.location.replace( `${ redirectUri }?code=${ user.username }&state=${ state }` );
             } );
         return true;
     }

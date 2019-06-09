@@ -41,6 +41,7 @@ const enMessages = {
     NOT_AUTHORIZED_ERR: '$t(ERROR), you are not authorized to access this page.',
     SERVER_NOT_REACHABLE_ERR: '$t(ERROR), unable to connect to server, please check your internet connection.',
     USERNAME_ALREADY_TAKEN_ERR: '$t(ERROR), the username is already in use, please pick another one.',
+    REQUEST_PARAMS_MISSING_ERR: '$t(ERROR), request parameters are missing, please contact the support team.',
 
 };
 

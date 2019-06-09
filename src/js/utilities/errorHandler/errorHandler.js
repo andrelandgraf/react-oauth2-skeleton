@@ -6,6 +6,7 @@ import {
     NotAuthorizedError,
     WrongCredentialsError,
     UsernameAlreadyTakenError,
+    RequestParameterMissingError,
 } from './Error';
 
 /*
@@ -29,6 +30,11 @@ export const throwWrongCredentialsError = () => {
 export const throwUsernameAlreadyTaken = () => {
     const msg = i18n.t( KEYS.MESSAGES.USERNAME_ALREADY_TAKEN_ERR );
     throw new UsernameAlreadyTakenError( msg );
+};
+
+export const throwRequestParameterMissingError = () => {
+    const msg = i18n.t( KEYS.MESSAGES.REQUEST_PARAMS_MISSING_ERR );
+    throw new RequestParameterMissingError( msg );
 };
 
 export const isCustomError = err => err.isCustomError;

@@ -33,6 +33,7 @@ const deMessages = {
     NOT_AUTHORIZED_ERR: '$t(ERROR), du bist nicht authorisiert diesen Bereich zu betreten.',
     SERVER_NOT_REACHABLE_ERR: '$t(ERROR), der Server ist nicht erreichbar, bitte überprüfe deine Internetverbindung.',
     USERNAME_ALREADY_TAKEN_ERR: '$t(ERROR), der $t(USERNAME) wird schon benutzt, bitte nutze einen Anderen.',
+    REQUEST_PARAMS_MISSING_ERR: '$t(ERROR), benötigte Request Parameter fehlen, bitte wenden Sie sich an den Support.',
 };
 
 const deData = {
