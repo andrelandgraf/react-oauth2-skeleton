@@ -85,6 +85,8 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
 
+- The `build.js` script relies on the homepage field in the `package.json`, please make sure to set the homepage field properly or do not set homepage if you want to reference the root folder. 
+
 ### `npm run deploy`
 
 Includes `npm run build` to make sure the react app is up to date. For more details checkout the chapter Deployment.

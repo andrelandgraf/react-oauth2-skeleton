@@ -7,7 +7,6 @@
   "bugs": {
     "url": "https://github.com/andrelandgraf/react-oauth2-skeleton/issues"
   },
-  "homepage": "https://github.com/andrelandgraf/react-oauth2-skeleton#readme",
   "dependencies": {
     "@babel/core": "7.4.3",
     "@svgr/webpack": "4.1.0",
@@ -77,7 +76,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "deploy": "npm run build && aws s3 sync build/ s3://<bucket-app-name>"
+    "deploy": "npm run build && aws s3 sync build/ s3://serverless-foodoo-react-app"
   },
   "browserslist": {
     "production": [
