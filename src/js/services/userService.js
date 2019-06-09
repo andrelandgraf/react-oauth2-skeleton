@@ -22,16 +22,8 @@ const setStoredAuthToken = ( authToken ) => {
 export const getStoredRefreshToken = () => window.localStorage.refreshToken;
 export const getStoredAuthToken = () => window.localStorage.authToken;
 
-export const logUserIn = ( username, password ) => {
-    const data = {
-        grant_type: GRANT_TYPES.PASSWORD,
-        username,
-        password,
-    };
-    const clientId = process.env.REACT_APP_OAUTH_CLIENT_KEY_ID;
-    const clientSecret = process.env.REACT_APP_OAUTH_CLIENT_SECRET_KEY;
-    const header = getOAuthHeader( clientId, clientSecret );
-    return postAuthRequest( '', qs.stringify( data ), header )
+const authenticate = ( data, header ) => (
+    postAuthRequest( '', qs.stringify( data ), header )
         .then( ( res ) => {
             setStoredAuthToken( res.data.accessToken );
             setStoredRefreshToken( res.data.refreshToken );
@@ -41,9 +33,20 @@ export const logUserIn = ( username, password ) => {
             if ( isCustomError( err ) ) {
                 throw err;
             }
-            LoggingUtility.error( 'Error while logging in user', err );
             throwWrongCredentialsError();
-        } );
+        } )
+);
+
+export const logUserIn = ( username, password ) => {
+    const data = {
+        grant_type: GRANT_TYPES.PASSWORD,
+        username,
+        password,
+    };
+    const clientId = process.env.REACT_APP_OAUTH_CLIENT_KEY_ID;
+    const clientSecret = process.env.REACT_APP_OAUTH_CLIENT_SECRET_KEY;
+    const header = getOAuthHeader( clientId, clientSecret );
+    return authenticate( data, header );
 };
 
 export const registerUser = ( username, password ) => {
@@ -74,19 +77,7 @@ export const oAuthUser = ( username, password, clientId ) => {
     }
     const clientSecret = process.env.REACT_APP_OAUTH_ALEXA_CLIENT_SECRET_KEY;
     const header = getOAuthHeader( clientId, clientSecret );
-    // after this backend call, the page will redirect automatically to aws/amazon
-    return postAuthRequest( '', qs.stringify( data ), header )
-        .then( ( res ) => {
-            setStoredAuthToken( res.data.accessToken );
-            setStoredRefreshToken( res.data.refreshToken );
-            return res.data.user;
-        } )
-        .catch( ( err ) => {
-            if ( isCustomError( err ) ) {
-                throw err;
-            }
-            throwWrongCredentialsError();
-        } );
+    return authenticate( data, header );
 };
 
 export const getUser = () => getRequest( USER_ENDPOINT );
