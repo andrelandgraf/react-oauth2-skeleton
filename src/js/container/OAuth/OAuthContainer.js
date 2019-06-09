@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { oAuthUser } from '../../services/userService';
 
@@ -8,16 +7,24 @@ import LoginContainer from '../Login/LoginContainer';
 class OAuthContainer extends React.Component {
     // decorates LoginContainer.handleSubmit function
     handleSubmit = async ( username, password ) => {
-        const { location } = this.props;
         // see: https://developer.amazon.com/de/docs/account-linking/configure-authorization-code-grant.html
         // client_id, response_type, scope, redirect_uri
-        if ( !location.query ) {
+        const { search } = window.location;
+        const urlParams = new URLSearchParams( search );
+        const clientId = urlParams.get( 'client_id' );
+        const state = urlParams.get( 'state' );
+        const redirectUri = urlParams.get( 'redirect_uri' );
+        if ( !clientId ) {
             // eslint-disable-next-line no-alert
             alert( 'bad query string, check query params' );
             return false;
         }
-        const { state, client_id: clientId, redirect_uri: redirectUri } = location.query;
-        oAuthUser( username, password, state, clientId, redirectUri );
+        console.log( 'state', state );
+        console.log( 'redirect url', redirectUri );
+        oAuthUser( username, password, clientId )
+            .then( ( user ) => {
+                window.location = `${ redirectUri }?code=${ user.username }`;
+            } );
         return true;
     }
 
@@ -31,11 +38,5 @@ class OAuthContainer extends React.Component {
         );
     }
 }
-
-OAuthContainer.propTypes = {
-    location: PropTypes.shape( {
-        query: PropTypes.object,
-    } ).isRequired,
-};
 
 export default OAuthContainer;

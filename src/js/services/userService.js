@@ -63,14 +63,11 @@ export const registerUser = ( username, password ) => {
         } );
 };
 
-export const oAuthUser = ( username, password, state, clientId, redirectUri ) => {
+export const oAuthUser = ( username, password, clientId ) => {
     const data = {
-        grant_type: GRANT_TYPES.AUTH_CODE,
+        grant_type: GRANT_TYPES.PASSWORD,
         username,
         password,
-        state,
-        // TODO where to add uri?
-        redirect_uri: redirectUri,
     };
     if ( process.env.REACT_APP_OAUTH_ALEXA_CLIENT_KEY_ID !== clientId ) {
         throw Error( 'unsupported client id!' );
@@ -79,6 +76,11 @@ export const oAuthUser = ( username, password, state, clientId, redirectUri ) =>
     const header = getOAuthHeader( clientId, clientSecret );
     // after this backend call, the page will redirect automatically to aws/amazon
     return postAuthRequest( '', qs.stringify( data ), header )
+        .then( ( res ) => {
+            setStoredAuthToken( res.data.accessToken );
+            setStoredRefreshToken( res.data.refreshToken );
+            return res.data.user;
+        } )
         .catch( ( err ) => {
             if ( isCustomError( err ) ) {
                 throw err;

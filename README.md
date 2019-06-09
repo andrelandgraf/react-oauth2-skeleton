@@ -4,6 +4,12 @@
 
 This repository provides a skeleton application that you can fork to quick-start your own React app!
 
+### Features
+
+- built-in structure for navigation with react-router
+- built-in structure and logic for internationalization with i18next
+- oauth2 flow (for more information, see chapter oAuth)
+
 Find the corresponding backend-api express-oauth2-skeleton [here](https://github.com/tum-aweink/express-oauth2-skeleton). 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) but we ejected Create React App to have more control over linting and configuration. Please find the Create React App documentation on the bottom of this README. 
@@ -125,6 +131,14 @@ Use the AWS command-line-interface to deploy the react web app. If you want to q
 - Run `aws configure` and configure the access keys (use eu-west-1 as your region).
 - Run `npm run deploy` to push the repository to the AWS S3 bucket.
 - Check out the app under: http://your-app-name.s3-website-eu-west-1.amazonaws.com
+
+### OAuth
+
+OAuth offers a rich set of protocols to allow authorized API calls. This skeleton includes logic and program flow for login and register functionality and account linking for third-party services (e.g. Amazon Alexa account linking).
+
+#### Account Linking
+
+Be aware that account linking will require https support. For an easy setup of https, build on top of the Deployment steps and integrate CloudFront for your S3 bucket to support https calls.
 
 ### `npm run build` fails to minify
 
