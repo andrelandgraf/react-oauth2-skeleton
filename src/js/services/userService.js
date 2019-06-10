@@ -3,16 +3,14 @@ import qs from 'qs';
 import Logger from '../utilities/Logger';
 import { throwWrongCredentialsError, throwUsernameAlreadyTaken, isCustomError } from '../utilities/errorHandler/errorHandler';
 import {
-    GRANT_TYPES, getOAuthHeader, postAuthRequest, getAuthenticatedHeader,
+    GRANT_TYPES, getOAuthHeader, postAuthRequest, getAuthorizeCode,
 } from './oAuthService';
 import { postRequest, getRequest } from './httpService';
 
 const LoggingUtility = new Logger( 'userService.js' );
 
 const REGISTER_ENDPOINT = 'auth/register';
-// not in use as we receive user obj on authentification
 const USER_ENDPOINT = 'auth/me';
-const AUTHORIZE_ENDPOINT = 'auth/authorize';
 
 const setStoredRefreshToken = ( refreshToken ) => {
     window.localStorage.refreshToken = refreshToken;
@@ -26,7 +24,7 @@ export const getStoredRefreshToken = () => window.localStorage.refreshToken;
 export const getStoredAuthToken = () => window.localStorage.authToken;
 
 const authenticate = ( data, header ) => (
-    postAuthRequest( '', qs.stringify( data ), header )
+    postAuthRequest( qs.stringify( data ), header )
         .then( ( res ) => {
             setStoredAuthToken( res.data.accessToken );
             setStoredRefreshToken( res.data.refreshToken );
@@ -69,7 +67,7 @@ export const registerUser = ( username, password ) => {
         } );
 };
 
-export const oAuthUser = ( username, password, clientId ) => {
+export const authorizeClient = ( username, password, clientId, state ) => {
     if ( process.env.REACT_APP_OAUTH_ALEXA_CLIENT_KEY_ID !== clientId ) {
         throw Error( 'unsupported client id!' );
     }
@@ -81,10 +79,15 @@ export const oAuthUser = ( username, password, clientId ) => {
     const clientSecret = process.env.REACT_APP_OAUTH_ALEXA_CLIENT_SECRET_KEY;
     const header = getOAuthHeader( clientId, clientSecret );
     return authenticate( data, header )
-        .then( () => fetch( `http://localhost:3333/${ AUTHORIZE_ENDPOINT }?client_id=${ clientId }&response_type=code`, { headers: getAuthenticatedHeader() } ) )
+        .then( () => getAuthorizeCode( clientId, state ) )
         .then( response => response.json() )
         .then( code => code.authorizationCode )
-        .catch( err => console.log( err ) );
+        .catch( ( err ) => {
+            if ( isCustomError( err ) ) {
+                throw err;
+            }
+            LoggingUtility.error( 'Error while authorizing client', err );
+        } );
 };
 
 export const getUser = () => getRequest( USER_ENDPOINT );

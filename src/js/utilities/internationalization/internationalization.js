@@ -12,6 +12,7 @@ export const KEYS = {
         HOME_WELCOME: 'HOME_WELCOME',
         PROFILE_TITLE: 'PROFILE_TITLE',
         PAGE_NOT_FOUND: 'PAGE_NOT_FOUND',
+        THIRD_PARTY_AUTHORIZATION: 'THIRD_PARTY_AUTHORIZATION',
     },
     LABELS: {
         APP_NAME: 'APP_NAME',
@@ -26,6 +27,7 @@ export const KEYS = {
         REGISTER: 'REGISTER',
         LOGIN: 'LOGIN',
         LOGOUT: 'LOGOUT',
+        AUTHORIZE: 'AUTHORIZE',
         ERROR: 'ERROR',
         WARNING: 'WARNING',
         SUCCESS: 'SUCCESS',

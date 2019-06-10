@@ -1,6 +1,9 @@
 import React from 'react';
+import i18n from 'i18next';
 
-import { oAuthUser } from '../../services/userService';
+import { KEYS } from '../../utilities/internationalization/internationalization';
+
+import { authorizeClient } from '../../services/userService';
 import { throwRequestParameterMissingError } from '../../utilities/errorHandler/errorHandler';
 
 import LoginContainer from '../Login/LoginContainer';
@@ -18,13 +21,11 @@ class OAuthContainer extends React.Component {
         if ( !clientId || !state || !redirectUri ) {
             throwRequestParameterMissingError();
         }
-        oAuthUser( username, password, clientId )
+        await authorizeClient( username, password, clientId, state )
             // eslint-disable-next-line no-unused-vars
             .then( ( authorizationCode ) => {
                 // Simulate an HTTP redirect
-                console.log( authorizationCode );
-                // eslint-disable-next-line max-len
-                // window.location.replace( `${ redirectUri }?code=${ authorizationCode }&state=${ state }` );
+                window.location.replace( `${ redirectUri }?code=${ authorizationCode }&state=${ state }` );
             } );
         return true;
     }
@@ -32,8 +33,8 @@ class OAuthContainer extends React.Component {
     render() {
         return (
             <LoginContainer
-                pageName="Third party service authorization"
-                actionName="authorize"
+                pageName={i18n.t( KEYS.HEADERS.THIRD_PARTY_AUTHORIZATION )}
+                actionName={i18n.t( KEYS.LABELS.AUTHORIZE )}
                 onSubmit={this.handleSubmit}
             />
         );

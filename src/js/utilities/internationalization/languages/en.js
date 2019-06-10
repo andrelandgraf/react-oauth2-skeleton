@@ -10,6 +10,7 @@ const enHeaders = {
     HOME_WELCOME: 'Welcome at $t(APP_NAME), {{name}}!',
     PROFILE_TITLE: 'Your Personal Profile',
     PAGE_NOT_FOUND: 'Page not found!',
+    THIRD_PARTY_AUTHORIZATION: 'Third party service authorization',
 };
 
 // short labels (e.g. button text, navbar text, input placehodlers, ...)
@@ -26,6 +27,7 @@ const enLabels = {
     REGISTER: 'Register',
     LOGIN: 'Login',
     LOGOUT: 'Logout',
+    AUTHORIZE: 'Authorize',
     ERROR: 'Error',
     WARNING: 'Warning',
     SUCCESS: 'Success',

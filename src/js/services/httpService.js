@@ -44,16 +44,13 @@ export const postRequest = ( endpoint, data ) => axios
         throw Error( `${ err.response.data.code }:${ err.response.message }` );
     } );
 
-export const getRequest = ( endpoint, headers = getHeader() ) => {
-    console.log( headers );
-    return axios
-        .get( API + endpoint, { headers } )
-        .then( res => res.data )
-        .catch( ( err ) => {
-            LoggingUtility.error( `Error in get request to entpoint ${ endpoint }`, err );
-            if ( isNetworkError( err ) ) {
-                throwServerNotReachableError();
-            }
-            throw Error( `${ err.response.data.code }:${ err.response.message }` );
-        } );
-};
+export const getRequest = ( endpoint, headers = getHeader() ) => axios
+    .get( API + endpoint, { headers } )
+    .then( res => res.data )
+    .catch( ( err ) => {
+        LoggingUtility.error( `Error in get request to entpoint ${ endpoint }`, err );
+        if ( isNetworkError( err ) ) {
+            throwServerNotReachableError();
+        }
+        throw Error( `${ err.response.data.code }:${ err.response.message }` );
+    } );

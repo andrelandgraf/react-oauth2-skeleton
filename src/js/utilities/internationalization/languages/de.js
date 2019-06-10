@@ -4,6 +4,7 @@ const deHeaders = {
     HOME_WELCOME: 'Willkommen bei $t(APP_NAME), {{name}}!',
     PROFILE_TITLE: 'Dein persönliches Profil',
     PAGE_NOT_FOUND: 'Seite nicht gefunden!',
+    THIRD_PARTY_AUTHORIZATION: 'Drittanbieter Autorisierung',
 };
 
 const deLabels = {
@@ -19,6 +20,7 @@ const deLabels = {
     REGISTER: 'Registrieren',
     LOGIN: 'Log-In',
     LOGOUT: 'Ausloggen',
+    AUTHORIZE: 'Autorisieren',
     ERROR: 'Error',
     WARNING: 'Warnung',
     SUCCESS: 'Erfolg',
