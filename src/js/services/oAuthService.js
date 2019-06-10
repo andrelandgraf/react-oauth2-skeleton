@@ -13,8 +13,12 @@ export const GRANT_TYPES = {
     PASSWORD: 'password',
 };
 
-// construct the oAuth header
-export const getOAuthHeader = ( clientID, clientSecret ) => {
+/**
+ * getTokenHeaders returns the required headers for the authentication request
+ * @param {string} clientID
+ * @param {string} clientSecret
+ */
+export const getTokenHeaders = ( clientID, clientSecret ) => {
     if ( !clientID || !clientSecret ) {
         throw Error( 'oauth credientiels undefined' );
     }
@@ -25,24 +29,34 @@ export const getOAuthHeader = ( clientID, clientSecret ) => {
     };
 };
 
-export const getAuthenticatedHeader = () => ( {
+/**
+ * getCodeHeaders returns the required headers for the authorization request
+ */
+export const getCodeHeaders = () => ( {
     'Content-Type': 'application/x-www-form-urlencoded',
     Authorization: `Bearer ${ getStoredAuthToken() }`,
 } );
 
-// the actual post request to the oauth url
+/**
+ * postAuthRequest requests the access token (e.g. through refresh token or user authentication)
+ * @param {*} data
+ * @param {*} headers
+ */
 export const postAuthRequest = ( data, headers ) => axios
     .post( API + AUTHENTICATE_ENDPOINT, data, { headers } )
     .catch( err => isNetworkError( err ) && throwServerNotReachableError() );
 
 export const getAuthorizeCode = ( clientId, state ) => {
     const params = `?client_id=${ clientId }&response_type=code&state=${ state }`;
-    return fetch( `${ API }${ AUTHORIZE_ENDPOINT }${ params }`, { headers: getAuthenticatedHeader() } );
+    return fetch( `${ API }${ AUTHORIZE_ENDPOINT }${ params }`, { headers: getCodeHeaders() } );
 };
 
-// refresh authToken
+/**
+ *  refreshAuthToken gets called to retrieve a new access token via the refresh token
+ * @param {Function} resolve
+ */
 export const refreshAuthToken = ( resolve ) => {
-    const headers = getOAuthHeader();
+    const headers = getTokenHeaders();
     const refreshToken = getStoredRefreshToken();
     const params = `?grant_type=${ GRANT_TYPES.REFRESH_TOKEN }&refresh_token=${ refreshToken }`;
     const data = {

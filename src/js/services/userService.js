@@ -3,7 +3,7 @@ import qs from 'qs';
 import Logger from '../utilities/Logger';
 import { throwWrongCredentialsError, throwUsernameAlreadyTaken, isCustomError } from '../utilities/errorHandler/errorHandler';
 import {
-    GRANT_TYPES, getOAuthHeader, postAuthRequest, getAuthorizeCode,
+    GRANT_TYPES, getTokenHeaders, postAuthRequest, getAuthorizeCode,
 } from './oAuthService';
 import { postRequest, getRequest } from './httpService';
 
@@ -23,6 +23,12 @@ const setStoredAuthToken = ( authToken ) => {
 export const getStoredRefreshToken = () => window.localStorage.refreshToken;
 export const getStoredAuthToken = () => window.localStorage.authToken;
 
+/**
+ * authenticate handles the login of a user via token retrieval
+ * @param {*} data
+ * @param {*} header
+ * @returns {Object} user object
+ */
 const authenticate = ( data, header ) => (
     postAuthRequest( qs.stringify( data ), header )
         .then( ( res ) => {
@@ -46,7 +52,7 @@ export const logUserIn = ( username, password ) => {
     };
     const clientId = process.env.REACT_APP_OAUTH_CLIENT_KEY_ID;
     const clientSecret = process.env.REACT_APP_OAUTH_CLIENT_SECRET_KEY;
-    const header = getOAuthHeader( clientId, clientSecret );
+    const header = getTokenHeaders( clientId, clientSecret );
     return authenticate( data, header );
 };
 
@@ -77,7 +83,7 @@ export const authorizeClient = ( username, password, clientId, state ) => {
         password,
     };
     const clientSecret = process.env.REACT_APP_OAUTH_ALEXA_CLIENT_SECRET_KEY;
-    const header = getOAuthHeader( clientId, clientSecret );
+    const header = getTokenHeaders( clientId, clientSecret );
     return authenticate( data, header )
         .then( () => getAuthorizeCode( clientId, state ) )
         .then( response => response.json() )

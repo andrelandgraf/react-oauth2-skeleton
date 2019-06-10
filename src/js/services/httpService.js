@@ -10,14 +10,14 @@ const LoggingUtility = new Logger( 'userService.js' );
 
 export const API = isDevelopment ? 'http://localhost:3333/' : process.env.REACT_APP_BACKEND_API;
 
-function getHeader() {
+function getHeaders() {
     return {
         accept: 'application/json',
         authorization: `Bearer ${ getStoredAuthToken() }`,
     };
 }
 
-function postHeader() {
+function postHeaders() {
     return {
         'content-type': 'application/json',
         authorization: `Bearer ${ getStoredAuthToken() }`,
@@ -27,7 +27,7 @@ function postHeader() {
 export const isNetworkError = err => !err.status && err.message === 'Network Error';
 
 export const postRequest = ( endpoint, data ) => axios
-    .post( API + endpoint, data, { headers: postHeader() } )
+    .post( API + endpoint, data, { headers: postHeaders() } )
     .then( ( res ) => {
         if ( res === 401 ) {
             return refreshAuthToken(
@@ -44,8 +44,8 @@ export const postRequest = ( endpoint, data ) => axios
         throw Error( `${ err.response.data.code }:${ err.response.message }` );
     } );
 
-export const getRequest = ( endpoint, headers = getHeader() ) => axios
-    .get( API + endpoint, { headers } )
+export const getRequest = endpoint => axios
+    .get( API + endpoint, { headers: getHeaders() } )
     .then( res => res.data )
     .catch( ( err ) => {
         LoggingUtility.error( `Error in get request to entpoint ${ endpoint }`, err );
