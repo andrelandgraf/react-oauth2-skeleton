@@ -19,9 +19,12 @@ class OAuthContainer extends React.Component {
             throwRequestParameterMissingError();
         }
         oAuthUser( username, password, clientId )
-            .then( ( user ) => {
+            // eslint-disable-next-line no-unused-vars
+            .then( ( authorizationCode ) => {
                 // Simulate an HTTP redirect
-                window.location.replace( `${ redirectUri }?code=${ user.username }&state=${ state }` );
+                console.log( authorizationCode );
+                // eslint-disable-next-line max-len
+                // window.location.replace( `${ redirectUri }?code=${ authorizationCode }&state=${ state }` );
             } );
         return true;
     }

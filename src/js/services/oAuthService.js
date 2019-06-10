@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { API, isNetworkError } from './httpService';
-import { getStoredRefreshToken } from './userService';
+import { getStoredRefreshToken, getStoredAuthToken } from './userService';
 import { throwServerNotReachableError } from '../utilities/errorHandler/errorHandler';
 
 const AUTH_ENDPOINT = 'auth/token';
@@ -23,6 +23,11 @@ export const getOAuthHeader = ( clientID, clientSecret ) => {
         Authorization: `Basic ${ credentials }`,
     };
 };
+
+export const getAuthenticatedHeader = () => ( {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    Authorization: `Bearer ${ getStoredAuthToken() }`,
+} );
 
 // the actual post request to the oauth url
 export const postAuthRequest = ( params, data, headers ) => axios
