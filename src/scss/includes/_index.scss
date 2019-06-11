@@ -7,8 +7,7 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 section {
@@ -25,6 +24,10 @@ h1 {
   font-size: $font-size-xl;
   font-weight: $font-weight-medium;
   margin: 40px;
+  @media screen and (max-width: $phone-width) {
+    margin: 15px;
+    font-size: $font-size-l;
+  }
 }
 
 p {
