@@ -16,13 +16,13 @@ import Loader from '../../components/loading/loader';
 
 import { isAuthenticated, getUser } from '../../services/userService';
 
-const AUTH_ROUTES = {
+export const AUTH_ROUTES = {
     HOME: '/',
     PROFILE: '/profile',
     OAUTH: '/oauth/v2/login',
 };
 
-const NONAUTH_ROUTES = {
+export const NONAUTH_ROUTES = {
     LOGIN: '/login',
     REGISTER: '/register',
     OAUTH: '/oauth/v2/login',

@@ -1,16 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 
 const NavBarItem = ( { label, link, float } ) => (
     <li className={float === 'right' ? 'item-right' : undefined}>
-        <a
-            className={window.location.pathname === link ? 'current-page' : undefined}
-            href={link}
+        <NavLink
+            exact
+            activeClassName="current-page"
+            to={link}
         >
             <p className="text-item">
                 { label }
             </p>
-        </a>
+        </NavLink>
     </li>
 );
 

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import i18n from 'i18next';
 
 import { KEYS } from '../../utilities/internationalization/internationalization';
+import { AUTH_ROUTES, NONAUTH_ROUTES } from '../App/App';
 
 import NavBar from '../../components/navbar/navbar';
 import NavBarItem from '../../components/navbar/elements/navbarItem';
@@ -62,13 +63,13 @@ class NavBarContainer extends React.Component {
         <NavBarItem
             key="home"
             label={i18n.t( KEYS.LABELS.HOME )}
-            link="/"
+            link={AUTH_ROUTES.HOME}
             float="left"
         />,
         <NavBarItem
             key="profile"
             label={i18n.t( KEYS.LABELS.MY_PROFILE )}
-            link="/profile"
+            link={AUTH_ROUTES.PROFILE}
             float="left"
         />,
         <PreferenceItem
@@ -89,13 +90,13 @@ class NavBarContainer extends React.Component {
         <NavBarItem
             key="register"
             label={i18n.t( KEYS.LABELS.REGISTER )}
-            link="/register"
+            link={NONAUTH_ROUTES.REGISTER}
             float="right"
         />,
         <NavBarItem
             key="login"
             label={i18n.t( KEYS.LABELS.LOGIN )}
-            link="/login"
+            link={AUTH_ROUTES.LOGIN}
             float="right"
         />,
     ];
