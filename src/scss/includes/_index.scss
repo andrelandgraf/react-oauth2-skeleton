@@ -25,7 +25,7 @@ h1 {
   font-weight: $font-weight-medium;
   margin: 40px;
   @media screen and (max-width: $phone-width) {
-    margin: 15px;
+    margin: 15px 5px;
     font-size: $font-size-xl;
   }
 }
