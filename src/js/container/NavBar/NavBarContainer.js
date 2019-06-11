@@ -96,7 +96,7 @@ class NavBarContainer extends React.Component {
         <NavBarItem
             key="login"
             label={i18n.t( KEYS.LABELS.LOGIN )}
-            link={AUTH_ROUTES.LOGIN}
+            link={NONAUTH_ROUTES.LOGIN}
             float="right"
         />,
     ];
