@@ -47,8 +47,7 @@ export const postAuthRequest = ( data, headers ) => axios
     .catch( err => isNetworkError( err ) && throwServerNotReachableError() );
 
 export const getAuthorizeCode = ( clientId, state, redirectUri ) => {
-    const params = `?client_id=${ clientId }&response_type=code&state=${ state }&redirect_uri="${ redirectUri }"`;
-    console.log( params );
+    const params = `?client_id=${ clientId }&response_type=code&state=${ state }&redirect_uri=${ redirectUri }`;
     return fetch( `${ API }${ AUTHORIZE_ENDPOINT }${ params }`, { headers: getCodeHeaders() } );
 };
 
