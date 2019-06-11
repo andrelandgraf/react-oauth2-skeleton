@@ -73,7 +73,7 @@ export const registerUser = ( username, password ) => {
         } );
 };
 
-export const authorizeClient = ( username, password, clientId, state ) => {
+export const authorizeClient = ( username, password, clientId, state, redirectUri ) => {
     if ( process.env.REACT_APP_OAUTH_ALEXA_CLIENT_KEY_ID !== clientId ) {
         throw Error( 'unsupported client id!' );
     }
@@ -85,7 +85,7 @@ export const authorizeClient = ( username, password, clientId, state ) => {
     const clientSecret = process.env.REACT_APP_OAUTH_ALEXA_CLIENT_SECRET_KEY;
     const header = getTokenHeaders( clientId, clientSecret );
     return authenticate( data, header )
-        .then( () => getAuthorizeCode( clientId, state ) )
+        .then( () => getAuthorizeCode( clientId, state, redirectUri ) )
         .then( response => response.json() )
         .then( code => code.authorizationCode )
         .catch( ( err ) => {

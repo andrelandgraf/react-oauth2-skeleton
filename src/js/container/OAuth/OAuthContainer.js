@@ -21,7 +21,7 @@ class OAuthContainer extends React.Component {
         if ( !clientId || !state || !redirectUri ) {
             throwRequestParameterMissingError();
         }
-        await authorizeClient( username, password, clientId, state )
+        await authorizeClient( username, password, clientId, state, redirectUri )
             // eslint-disable-next-line no-unused-vars
             .then( ( authorizationCode ) => {
                 // Simulate an HTTP redirect
