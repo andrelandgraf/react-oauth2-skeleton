@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import Loader from '../loading/loader';
 
+import { BUTTON_STYLES } from './button';
+
 const SubmitButton = ( { label, isLoading, disabled } ) => (
     <React.Fragment>
         {
@@ -12,7 +14,7 @@ const SubmitButton = ( { label, isLoading, disabled } ) => (
                     <input
                         type="submit"
                         value={label}
-                        className="clickable"
+                        className={`${ BUTTON_STYLES } btn btn-primary`}
                         disabled={disabled ? 'disabled' : undefined}
                     />
                 )

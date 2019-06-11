@@ -7,6 +7,9 @@
 }
 
 .login-form {
+    @extend .box;
+    display: flex;
+    flex-direction: column;
     width: 250px;
     height: 250px;
     padding: 20px;

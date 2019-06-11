@@ -1,4 +1,5 @@
 .preferences-menu {
+    @extend .box;
     // make modal menu absolute
     position: absolute;
     top: 50px;

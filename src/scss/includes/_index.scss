@@ -35,7 +35,7 @@ p.limit {
   text-align: justify;
 }
 
-input {
+input:not([type=submit]){
    // General Styles
    background-color: transparent;
    border: none;

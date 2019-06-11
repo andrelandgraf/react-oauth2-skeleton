@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 
 export const BUTTON_STYLES = 'clickable button-center';
 
-const Button = ( { classes, text, onClick } ) => (
+const Button = ( {
+    classes, text, onClick, primary,
+} ) => (
     <button
-        className={`${ BUTTON_STYLES } ${ classes }`}
+        className={`${ BUTTON_STYLES } btn ${ primary ? 'btn-primary' : undefined } ${ classes }`}
         type="button"
         onClick={onClick}
     >
@@ -17,12 +19,14 @@ Button.propTypes = {
     classes: PropTypes.string,
     text: PropTypes.string,
     onClick: PropTypes.func,
+    primary: PropTypes.bool,
 };
 
 Button.defaultProps = {
     classes: '',
     text: 'click',
     onClick: undefined,
+    primary: false,
 };
 
 export default Button;
