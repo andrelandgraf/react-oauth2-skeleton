@@ -7,7 +7,7 @@ const CustomButton = ( {
     id, classes, onClick, children,
 } ) => (
     <div
-        className={`${ BUTTON_STYLES } ${ classes }`}
+        className={`${ BUTTON_STYLES } ${ classes || undefined }`}
         id={id}
         tabIndex={0}
         role="button"

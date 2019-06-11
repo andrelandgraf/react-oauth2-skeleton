@@ -7,7 +7,7 @@ const Button = ( {
     classes, text, onClick, primary,
 } ) => (
     <button
-        className={`${ BUTTON_STYLES } btn ${ primary ? 'btn-primary' : undefined } ${ classes }`}
+        className={`${ BUTTON_STYLES } btn ${ primary ? 'btn-primary' : undefined } ${ classes || undefined }`}
         type="button"
         onClick={onClick}
     >

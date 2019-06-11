@@ -24,6 +24,7 @@ h1 {
   color: $font-color;
   font-size: $font-size-xl;
   font-weight: $font-weight-medium;
+  margin: 40px;
 }
 
 p {
@@ -52,4 +53,9 @@ input:not([type=submit]){
    padding: $input-padding;
    transition: $input-transition;
    width: 100%;
+   &:focus {
+    // see also _app.scss .aria-element
+    border-color: $hover-primary-color !important;
+    outline: 0 !important;
+  }
 }

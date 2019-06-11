@@ -15,6 +15,7 @@
         }
 
         a {
+            @extend .aria-element;
             height: 50px;
             display: block;
             color: $white;
@@ -34,13 +35,14 @@
                 color: $black;
             }
 
-            .text-item {
+            .text-item {                                    
                 padding: 14px 16px;
                 margin: 0;
             }
         }
 
         .icon-item {
+            @extend .aria-element;
             height: 50px;
             img {
                 padding: 10px 16px;

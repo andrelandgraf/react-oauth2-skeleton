@@ -31,8 +31,9 @@
         }
     }
 
-    .item {    
+    .item {     
         div {
+            @extend .aria-element;
             display: block;
             color: $white;
             text-align: center;
@@ -44,7 +45,7 @@
                 background-color: $black;
             }
 
-            &.current {
+            &.current { 
                 pointer-events: none;
                 cursor: default;
                 text-decoration: none;
