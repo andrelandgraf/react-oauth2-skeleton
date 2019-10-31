@@ -107,7 +107,7 @@ Includes `npm run build` to make sure the react app is up to date. For more deta
 
 ## Deployment
 
-Use the AWS command-line-interface to deploy the react web app. If you want to quickly host your application, you can do so on a AWS S3 bucket. Make sure you have a AWS developer account and create your access keys via the AWS console. There are plenty of nice guides out there on how to create a S3 bucket for static web hosting! Just set up your own bucket and also create yoruself secret & access keys for CLI access and follow this quick guideline: 
+Use the AWS command-line-interface to deploy the react web app. If you want to quickly host your application, you can do so on a AWS S3 bucket. Make sure you have a AWS developer account and create your access keys via the AWS console. There are plenty of nice guides out there on how to create a S3 bucket for static web hosting! Just set up your own bucket and also create the secret & access keys for CLI access and follow this quick guideline: 
 
 - First install awscli via: `brew install awscli`
 - Run `aws configure` and configure the access keys (use eu-west-1 as your region).
